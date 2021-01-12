@@ -10,14 +10,10 @@ Android 开发工具包
 第一步项目的build.gradle里，加入如下代码：
 
 allprojects {
-
 		repositories {
-
 			...
 			maven { url 'https://jitpack.io' }
-
 		}
-
 	}
 
 
