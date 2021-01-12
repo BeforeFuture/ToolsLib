@@ -1,0 +1,12 @@
+<paths>
+    <!--换头像-->
+    <external-path
+        name="my_images"
+        path="Pictures" />
+
+
+    <!--webview-->
+    <external-cache-path
+        name="agenweb_files"
+        path="agentweb-cache" />
+</paths>
