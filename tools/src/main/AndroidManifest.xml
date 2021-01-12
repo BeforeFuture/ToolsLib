@@ -27,23 +27,6 @@
             </intent-filter>
         </activity>
 
-        <!--<activity android:name=".MainActivity" />-->
-        <activity android:name=".WebViewActivity" />
-        <activity android:name=".MatisseActivity" />
-        <activity android:name=".matisse.internal.ui.AlbumPreviewActivity"/>
-        <activity android:name=".matisse.internal.ui.SelectedPreviewActivity"/>
-
-        <!-- 选择图片需要的fileProvider -->
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths_public" />
-        </provider>
-
     </application>
 
 </manifest>

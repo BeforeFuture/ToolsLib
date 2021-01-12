@@ -30,6 +30,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+import android.widget.FrameLayout;
 
 /**
  * @author cenxiaozhong
@@ -124,15 +125,15 @@ public class WebIndicator extends BaseIndicatorView implements BaseIndicatorSpec
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int wMode = MeasureSpec.getMode(widthMeasureSpec);
-        int w = MeasureSpec.getSize(widthMeasureSpec);
-        int hMode = MeasureSpec.getMode(heightMeasureSpec);
-        int h = MeasureSpec.getSize(heightMeasureSpec);
+        int wMode = View.MeasureSpec.getMode(widthMeasureSpec);
+        int w = View.MeasureSpec.getSize(widthMeasureSpec);
+        int hMode = View.MeasureSpec.getMode(heightMeasureSpec);
+        int h = View.MeasureSpec.getSize(heightMeasureSpec);
 
-        if (wMode == MeasureSpec.AT_MOST) {
+        if (wMode == View.MeasureSpec.AT_MOST) {
             w = w <= getContext().getResources().getDisplayMetrics().widthPixels ? w : getContext().getResources().getDisplayMetrics().widthPixels;
         }
-        if (hMode == MeasureSpec.AT_MOST) {
+        if (hMode == View.MeasureSpec.AT_MOST) {
             h = mWebIndicatorDefaultHeight;
         }
         this.setMeasuredDimension(w, h);
@@ -301,7 +302,7 @@ public class WebIndicator extends BaseIndicatorView implements BaseIndicatorSpec
 
 
     @Override
-    public LayoutParams offerLayoutParams() {
-        return new LayoutParams(-1, mWebIndicatorDefaultHeight);
+    public FrameLayout.LayoutParams offerLayoutParams() {
+        return new FrameLayout.LayoutParams(-1, mWebIndicatorDefaultHeight);
     }
 }

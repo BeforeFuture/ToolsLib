@@ -253,13 +253,13 @@ public class DefaultChromeClient extends MiddlewareWebChromeBase {
 
 	@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 	@Override
-	public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
+	public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, WebChromeClient.FileChooserParams fileChooserParams) {
 		LogUtils.i(TAG, "openFileChooser>=5.0");
 		return openFileChooserAboveL(webView, filePathCallback, fileChooserParams);
 	}
 
 	@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-	private boolean openFileChooserAboveL(WebView webView, ValueCallback<Uri[]> valueCallbacks, FileChooserParams fileChooserParams) {
+	private boolean openFileChooserAboveL(WebView webView, ValueCallback<Uri[]> valueCallbacks, WebChromeClient.FileChooserParams fileChooserParams) {
 		LogUtils.i(TAG, "fileChooserParams:" + fileChooserParams.getAcceptTypes() + "  getTitle:" + fileChooserParams.getTitle() + " accept:" + Arrays.toString(fileChooserParams.getAcceptTypes()) + " length:" + fileChooserParams.getAcceptTypes().length + "  isCaptureEnabled:" + fileChooserParams.isCaptureEnabled() + "  " + fileChooserParams.getFilenameHint() + "  intent:" + fileChooserParams.createIntent().toString() + "   mode:" + fileChooserParams.getMode());
 		Activity mActivity = this.mActivityWeakReference.get();
 		if (mActivity == null || mActivity.isFinishing()) {
@@ -329,7 +329,7 @@ public class DefaultChromeClient extends MiddlewareWebChromeBase {
 	}
 
 	@Override
-	public void onShowCustomView(View view, CustomViewCallback callback) {
+	public void onShowCustomView(View view, WebChromeClient.CustomViewCallback callback) {
 		if (mIVideo != null) {
 			mIVideo.onShowCustomView(view, callback);
 		}
