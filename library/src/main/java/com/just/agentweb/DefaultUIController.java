@@ -30,7 +30,8 @@ import android.webkit.JsResult;
 import android.webkit.WebView;
 import android.widget.EditText;
 
-import com.yy.toolslib.R;
+import com.yy.library.R;
+import com.yy.toolslib.utils.CTInflaterUtils;
 
 
 /**
@@ -71,9 +72,9 @@ public class DefaultUIController extends AbsAgentWebUIController {
         if (mAskOpenOtherAppDialog == null) {
             mAskOpenOtherAppDialog = new AlertDialog
                     .Builder(mActivity)
-                    .setMessage(mResources.getString(R.string.agentweb_leave_app_and_go_other_page,
+                    .setMessage(mResources.getString(CTInflaterUtils.getString(view.getContext(),"agentweb_leave_app_and_go_other_page"),
                             AgentWebUtils.getApplicationName(mActivity)))
-                    .setTitle(mResources.getString(R.string.agentweb_tips))
+                    .setTitle(mResources.getString(CTInflaterUtils.getString(view.getContext(),"agentweb_tips")))
                     .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -82,7 +83,7 @@ public class DefaultUIController extends AbsAgentWebUIController {
                             }
                         }
                     })//
-                    .setPositiveButton(mResources.getString(R.string.agentweb_leave), new DialogInterface.OnClickListener() {
+                    .setPositiveButton(mResources.getString(CTInflaterUtils.getString(view.getContext(),"agentweb_leave")), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             if (callback != null) {
@@ -122,9 +123,9 @@ public class DefaultUIController extends AbsAgentWebUIController {
         }
         AlertDialog mAlertDialog = null;
         mAlertDialog = new AlertDialog.Builder(mActivity)
-                .setTitle(mResources.getString(R.string.agentweb_tips))
-                .setMessage(mResources.getString(R.string.agentweb_honeycomblow))
-                .setNegativeButton(mResources.getString(R.string.agentweb_download), new DialogInterface.OnClickListener() {
+                .setTitle(mResources.getString(CTInflaterUtils.getString(mActivity,"agentweb_tips")))
+                .setMessage(mResources.getString(CTInflaterUtils.getString(mActivity,"agentweb_honeycomblow")))
+                .setNegativeButton(mResources.getString(CTInflaterUtils.getString(mActivity,"agentweb_download")), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (dialog != null) {
@@ -135,7 +136,7 @@ public class DefaultUIController extends AbsAgentWebUIController {
                         }
                     }
                 })//
-                .setPositiveButton(mResources.getString(R.string.agentweb_cancel), new DialogInterface.OnClickListener() {
+                .setPositiveButton(mResources.getString(CTInflaterUtils.getString(mActivity,"agentweb_cancel")), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (dialog != null) {

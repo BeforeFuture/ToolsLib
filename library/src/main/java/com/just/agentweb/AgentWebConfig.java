@@ -26,7 +26,8 @@ import android.webkit.CookieSyncManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebView;
 
-import com.yy.toolslib.BuildConfig;
+
+import com.yy.library.BuildConfig;
 
 import java.io.File;
 
