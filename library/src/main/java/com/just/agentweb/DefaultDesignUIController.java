@@ -36,7 +36,7 @@ import android.webkit.JsResult;
 import android.webkit.WebView;
 import android.widget.TextView;
 
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 
 /**
  * @author cenxiaozhong
@@ -71,7 +71,7 @@ public class DefaultDesignUIController extends DefaultUIController {
                     message,
                     Snackbar.LENGTH_SHORT,
                     Color.WHITE,
-                    mActivity.getResources().getColor(CTInflaterUtils.getIdByName(view.getContext(), "color", "black")),
+                    mActivity.getResources().getColor(YyInflaterUtils.getIdByName(view.getContext(), "color", "black")),
                     null,
                     -1,
                     null);
@@ -133,7 +133,7 @@ public class DefaultDesignUIController extends DefaultUIController {
         return new RecyclerView.Adapter<BottomSheetHolder>() {
             @Override
             public BottomSheetHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-                return new BottomSheetHolder(mLayoutInflater.inflate(CTInflaterUtils.getLayout(mActivity, "simple_list_item_agent_1"), viewGroup, false));
+                return new BottomSheetHolder(mLayoutInflater.inflate(YyInflaterUtils.getLayout(mActivity, "simple_list_item_agent_1"), viewGroup, false));
             }
 
             @Override

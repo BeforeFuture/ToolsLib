@@ -24,7 +24,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 
 import com.yy.toolslib.matisse.internal.loader.AlbumLoader;
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 
 public class Album implements Parcelable {
     public static final Creator<Album> CREATOR = new Creator<Album>() {
@@ -104,7 +104,7 @@ public class Album implements Parcelable {
 
     public String getDisplayName(Context context) {
         if (isAll()) {
-            return context.getString( CTInflaterUtils.getString(context,"album_name_all"));
+            return context.getString( YyInflaterUtils.getString(context,"album_name_all"));
         }
         return mDisplayName;
     }

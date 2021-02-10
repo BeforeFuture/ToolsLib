@@ -34,7 +34,7 @@ import com.yy.toolslib.matisse.internal.model.SelectedItemCollection;
 import com.yy.toolslib.matisse.internal.ui.adapter.AlbumMediaAdapter;
 import com.yy.toolslib.matisse.internal.ui.widget.MediaGridInset;
 import com.yy.toolslib.matisse.internal.utils.UIUtils;
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 
 
 public class MediaSelectionFragment extends Fragment implements
@@ -78,13 +78,13 @@ public class MediaSelectionFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(CTInflaterUtils.getLayout(getActivity(), "fragment_media_selection"), container, false);
+        return inflater.inflate(YyInflaterUtils.getLayout(getActivity(), "fragment_media_selection"), container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = view.findViewById(CTInflaterUtils.getControl(getActivity(), "recyclerview"));
+        mRecyclerView = view.findViewById(YyInflaterUtils.getControl(getActivity(), "recyclerview"));
     }
 
     @Override
@@ -107,7 +107,7 @@ public class MediaSelectionFragment extends Fragment implements
         }
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), spanCount));
 
-        int spacing = getResources().getDimensionPixelSize(CTInflaterUtils.getIdByName(getActivity(), "dimen", "media_grid_spacing"));
+        int spacing = getResources().getDimensionPixelSize(YyInflaterUtils.getIdByName(getActivity(), "dimen", "media_grid_spacing"));
         mRecyclerView.addItemDecoration(new MediaGridInset(spanCount, spacing, false));
         mRecyclerView.setAdapter(mAdapter);
         mAlbumMediaCollection.onCreate(getActivity(), this);

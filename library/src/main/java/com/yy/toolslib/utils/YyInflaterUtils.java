@@ -4,9 +4,9 @@ package com.yy.toolslib.utils;
 import android.content.Context;
 import android.content.res.Resources;
 
-public class CTInflaterUtils {
+public class YyInflaterUtils {
 
-    private static final String TAG = "CTInflaterUtils";
+    private static final String TAG = "YyInflaterUtils";
 
     /**
      * 获取布局文件

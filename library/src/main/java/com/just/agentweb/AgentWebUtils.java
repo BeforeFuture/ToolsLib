@@ -60,7 +60,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
 
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -735,7 +735,7 @@ public class AgentWebUtils {
 		if (activity == null || activity.isFinishing()) {
 			return;
 		}
-		WebParentLayout mWebParentLayout = (WebParentLayout) activity.findViewById(CTInflaterUtils.getIdByName(activity,"id","web_parent_layout_id"));
+		WebParentLayout mWebParentLayout = (WebParentLayout) activity.findViewById(YyInflaterUtils.getIdByName(activity,"id","web_parent_layout_id"));
 		AbsAgentWebUIController mAgentWebUIController = mWebParentLayout.provide();
 		if (mAgentWebUIController != null) {
 			mAgentWebUIController.onShowMessage(message, from);
@@ -811,7 +811,7 @@ public class AgentWebUtils {
 		while (mViewGroup != null) {
 
 			LogUtils.i(TAG, "ViewGroup:" + mViewGroup);
-			if (mViewGroup.getId() == CTInflaterUtils.getIdByName(webView.getContext(),"id","web_parent_layout_id")) {
+			if (mViewGroup.getId() == YyInflaterUtils.getIdByName(webView.getContext(),"id","web_parent_layout_id")) {
 				WebParentLayout mWebParentLayout = (WebParentLayout) mViewGroup;
 				LogUtils.i(TAG, "found WebParentLayout");
 				return mWebParentLayout;

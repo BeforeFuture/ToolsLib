@@ -35,7 +35,7 @@ import com.yy.toolslib.matisse.internal.entity.SelectionSpec;
 import com.yy.toolslib.matisse.internal.model.SelectedItemCollection;
 import com.yy.toolslib.matisse.internal.ui.widget.CheckView;
 import com.yy.toolslib.matisse.internal.ui.widget.MediaGrid;
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 
 
 public class AlbumMediaAdapter extends
@@ -59,7 +59,7 @@ public class AlbumMediaAdapter extends
         mSelectionSpec = SelectionSpec.getInstance();
         mSelectedCollection = selectedCollection;
 
-        TypedArray ta = context.getTheme().obtainStyledAttributes(new int[]{CTInflaterUtils.getIdByName(context, "attr", "item_placeholder")});
+        TypedArray ta = context.getTheme().obtainStyledAttributes(new int[]{YyInflaterUtils.getIdByName(context, "attr", "item_placeholder")});
         mPlaceholder = ta.getDrawable(0);
         ta.recycle();
 
@@ -69,7 +69,7 @@ public class AlbumMediaAdapter extends
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_CAPTURE) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(CTInflaterUtils.getLayout(mContext,"photo_capture_item"), parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(YyInflaterUtils.getLayout(mContext,"photo_capture_item"), parent, false);
             CaptureViewHolder holder = new CaptureViewHolder(v, mContext);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,7 +81,7 @@ public class AlbumMediaAdapter extends
             });
             return holder;
         } else if (viewType == VIEW_TYPE_MEDIA) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(CTInflaterUtils.getLayout(mContext, "media_grid_item"), parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(YyInflaterUtils.getLayout(mContext, "media_grid_item"), parent, false);
             return new MediaViewHolder(v);
         }
         return null;
@@ -93,7 +93,7 @@ public class AlbumMediaAdapter extends
             CaptureViewHolder captureViewHolder = (CaptureViewHolder) holder;
             Drawable[] drawables = captureViewHolder.mHint.getCompoundDrawables();
             TypedArray ta = holder.itemView.getContext().getTheme().obtainStyledAttributes(
-                    new int[]{CTInflaterUtils.getIdByName(mContext, "attr", "capture_textColor")});
+                    new int[]{YyInflaterUtils.getIdByName(mContext, "attr", "capture_textColor")});
             int color = ta.getColor(0, 0);
             ta.recycle();
 
@@ -252,7 +252,7 @@ public class AlbumMediaAdapter extends
             int spanCount = ((GridLayoutManager) lm).getSpanCount();
             int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
             int availableWidth = screenWidth - context.getResources().getDimensionPixelSize(
-                    CTInflaterUtils.getIdByName(context, "dimen", "media_grid_spacing")) * (spanCount - 1);
+                    YyInflaterUtils.getIdByName(context, "dimen", "media_grid_spacing")) * (spanCount - 1);
             mImageResize = availableWidth / spanCount;
             mImageResize = (int) (mImageResize * mSelectionSpec.thumbnailScale);
         }
@@ -288,7 +288,7 @@ public class AlbumMediaAdapter extends
         CaptureViewHolder(View itemView, Context context) {
             super(itemView);
 
-            mHint = itemView.findViewById(CTInflaterUtils.getControl(context, "hint"));
+            mHint = itemView.findViewById(YyInflaterUtils.getControl(context, "hint"));
         }
     }
 

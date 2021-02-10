@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.yy.toolslib.notchlib.NotchScreenManager;
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 import com.yy.toolslib.utils.ConvertToTranslucent;
 
 public class ToolsBaseActivity extends FragmentActivity {// Activity
@@ -56,15 +56,15 @@ public class ToolsBaseActivity extends FragmentActivity {// Activity
 
 
     protected int getLayout(String layoutName) {
-        return CTInflaterUtils.getLayout(this, layoutName);
+        return YyInflaterUtils.getLayout(this, layoutName);
     }
 
     protected int getId(String idName) {
-        return CTInflaterUtils.getControl(this, idName);
+        return YyInflaterUtils.getControl(this, idName);
     }
 
     protected int getDrawable(String drawbleName) {
-        return CTInflaterUtils.getDrawable(this, drawbleName);
+        return YyInflaterUtils.getDrawable(this, drawbleName);
     }
 
     /**
@@ -74,7 +74,7 @@ public class ToolsBaseActivity extends FragmentActivity {// Activity
      * @return
      */
     protected int getString(String stringName) {
-        return CTInflaterUtils.getString(this, stringName);
+        return YyInflaterUtils.getString(this, stringName);
     }
 
     /**
@@ -84,7 +84,7 @@ public class ToolsBaseActivity extends FragmentActivity {// Activity
      * @return
      */
     protected int getStringArrays(String stringName) {
-        return CTInflaterUtils.getIdByName(this, "array", stringName);
+        return YyInflaterUtils.getIdByName(this, "array", stringName);
     }
 
 }

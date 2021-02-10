@@ -33,7 +33,7 @@ import com.yy.toolslib.matisse.filter.Filter;
 import com.yy.toolslib.matisse.internal.entity.IncapableCause;
 import com.yy.toolslib.matisse.internal.entity.Item;
 import com.yy.toolslib.matisse.internal.entity.SelectionSpec;
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -126,7 +126,7 @@ public final class PhotoMetadataUtils {
 
     public static IncapableCause isAcceptable(Context context, Item item) {
         if (!isSelectableType(context, item)) {
-            return new IncapableCause(context.getString( CTInflaterUtils.getString(context,"error_file_type")));
+            return new IncapableCause(context.getString( YyInflaterUtils.getString(context,"error_file_type")));
         }
 
         if (SelectionSpec.getInstance().filters != null) {

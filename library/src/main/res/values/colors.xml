@@ -10,6 +10,7 @@
     <color name="white">#FFFFFF</color>
     <color name="background_gray">#F4F4F4</color>
     <color name="text_color_black">#333333</color>
+    <color name="text_color_red">#FF0000</color>
     <color name="conner_gray">#999999</color>
 
     <color name="preview_bottom_toolbar_bg">#CC000000</color>

@@ -30,7 +30,7 @@ import android.widget.TextView;
 
 import com.yy.toolslib.matisse.internal.entity.Album;
 import com.yy.toolslib.matisse.internal.utils.Platform;
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 
 public class AlbumsSpinner {
 
@@ -43,8 +43,8 @@ public class AlbumsSpinner {
 
     public AlbumsSpinner(@NonNull Context context) {
         this.context = context;
-        mListPopupWindow = new ListPopupWindow(context, null, CTInflaterUtils.getIdByName(context, "attr", "listPopupWindowStyleCustom"));
-//        mListPopupWindow.setBackgroundDrawable(context.getResources().getDrawable(CTInflaterUtils.getIdByName(context, "drawable", "white_bg")));
+        mListPopupWindow = new ListPopupWindow(context, null, YyInflaterUtils.getIdByName(context, "attr", "listPopupWindowStyleCustom"));
+//        mListPopupWindow.setBackgroundDrawable(context.getResources().getDrawable(YyInflaterUtils.getIdByName(context, "drawable", "white_bg")));
         mListPopupWindow.setModal(true);
         float density = context.getResources().getDisplayMetrics().density;
         mListPopupWindow.setContentWidth(ListPopupWindow.MATCH_PARENT);//(int) (216 * density)
@@ -108,7 +108,7 @@ public class AlbumsSpinner {
         /*Drawable[] drawables = mSelected.getCompoundDrawables();
         Drawable right = drawables[2];
         TypedArray ta = mSelected.getContext().getTheme().obtainStyledAttributes(
-                new int[]{CTInflaterUtils.getIdByName(context,"attr","album_element_color")});
+                new int[]{YyInflaterUtils.getIdByName(context,"attr","album_element_color")});
         int color = ta.getColor(0, 0);
         ta.recycle();
         right.setColorFilter(color, PorterDuff.Mode.SRC_IN);*/
@@ -118,7 +118,7 @@ public class AlbumsSpinner {
 
             @Override
             public void onClick(View v) {
-                int itemHeight = v.getResources().getDimensionPixelSize(CTInflaterUtils.getIdByName(activity, "dimen", "album_item_height"));
+                int itemHeight = v.getResources().getDimensionPixelSize(YyInflaterUtils.getIdByName(activity, "dimen", "album_item_height"));
                 mListPopupWindow.setHeight(
                         mAdapter.getCount() > MAX_SHOWN_COUNT ? itemHeight * MAX_SHOWN_COUNT
                                 : itemHeight * mAdapter.getCount());

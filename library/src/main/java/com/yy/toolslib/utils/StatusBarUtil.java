@@ -23,8 +23,8 @@ public class StatusBarUtil {
 
     public static final int DEFAULT_STATUS_BAR_ALPHA = 112;
     private static final int TAG_KEY_HAVE_SET_OFFSET = -123;
-//    private static final int FAKE_STATUS_BAR_VIEW_ID = CTInflaterUtils.getIdByName(MCApiFactory.getMCApi().getContext(), "id", "statusbarutil_fake_status_bar_view");
-//    private static final int FAKE_TRANSLUCENT_VIEW_ID = CTInflaterUtils.getIdByName(MCApiFactory.getMCApi().getContext(), "id", "statusbarutil_translucent_view");
+//    private static final int FAKE_STATUS_BAR_VIEW_ID = YyInflaterUtils.getIdByName(MCApiFactory.getMCApi().getContext(), "id", "statusbarutil_fake_status_bar_view");
+//    private static final int FAKE_TRANSLUCENT_VIEW_ID = YyInflaterUtils.getIdByName(MCApiFactory.getMCApi().getContext(), "id", "statusbarutil_translucent_view");
 
     private static int FAKE_STATUS_BAR_VIEW_ID;
     private static int FAKE_TRANSLUCENT_VIEW_ID;
@@ -55,7 +55,7 @@ public class StatusBarUtil {
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
-            FAKE_STATUS_BAR_VIEW_ID = CTInflaterUtils.getIdByName(activity, "id", "statusbarutil_fake_status_bar_view");
+            FAKE_STATUS_BAR_VIEW_ID = YyInflaterUtils.getIdByName(activity, "id", "statusbarutil_fake_status_bar_view");
             View fakeStatusBarView = decorView.findViewById(FAKE_STATUS_BAR_VIEW_ID);
             if (fakeStatusBarView != null) {
                 if (fakeStatusBarView.getVisibility() == View.GONE) {
@@ -146,7 +146,7 @@ public class StatusBarUtil {
         transparentStatusBar(activity);
         ViewGroup contentView = (ViewGroup) activity.findViewById(android.R.id.content);
         // 移除半透明矩形,以免叠加
-        FAKE_STATUS_BAR_VIEW_ID = CTInflaterUtils.getIdByName(activity, "id", "statusbarutil_fake_status_bar_view");
+        FAKE_STATUS_BAR_VIEW_ID = YyInflaterUtils.getIdByName(activity, "id", "statusbarutil_fake_status_bar_view");
         View fakeStatusBarView = contentView.findViewById(FAKE_STATUS_BAR_VIEW_ID);
         if (fakeStatusBarView != null) {
             if (fakeStatusBarView.getVisibility() == View.GONE) {
@@ -276,7 +276,7 @@ public class StatusBarUtil {
         // 生成一个状态栏大小的矩形
         // 添加 statusBarView 到布局中
         ViewGroup contentLayout = (ViewGroup) drawerLayout.getChildAt(0);
-        FAKE_STATUS_BAR_VIEW_ID = CTInflaterUtils.getIdByName(activity, "id", "statusbarutil_fake_status_bar_view");
+        FAKE_STATUS_BAR_VIEW_ID = YyInflaterUtils.getIdByName(activity, "id", "statusbarutil_fake_status_bar_view");
         View fakeStatusBarView = contentLayout.findViewById(FAKE_STATUS_BAR_VIEW_ID);
         if (fakeStatusBarView != null) {
             if (fakeStatusBarView.getVisibility() == View.GONE) {
@@ -324,7 +324,7 @@ public class StatusBarUtil {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             // 生成一个状态栏大小的矩形
             ViewGroup contentLayout = (ViewGroup) drawerLayout.getChildAt(0);
-            FAKE_STATUS_BAR_VIEW_ID = CTInflaterUtils.getIdByName(activity, "id", "statusbarutil_fake_status_bar_view");
+            FAKE_STATUS_BAR_VIEW_ID = YyInflaterUtils.getIdByName(activity, "id", "statusbarutil_fake_status_bar_view");
             View fakeStatusBarView = contentLayout.findViewById(FAKE_STATUS_BAR_VIEW_ID);
             if (fakeStatusBarView != null) {
                 if (fakeStatusBarView.getVisibility() == View.GONE) {
@@ -510,12 +510,12 @@ public class StatusBarUtil {
      */
     public static void hideFakeStatusBarView(Activity activity) {
         ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
-        FAKE_STATUS_BAR_VIEW_ID = CTInflaterUtils.getIdByName(activity, "id", "statusbarutil_fake_status_bar_view");
+        FAKE_STATUS_BAR_VIEW_ID = YyInflaterUtils.getIdByName(activity, "id", "statusbarutil_fake_status_bar_view");
         View fakeStatusBarView = decorView.findViewById(FAKE_STATUS_BAR_VIEW_ID);
         if (fakeStatusBarView != null) {
             fakeStatusBarView.setVisibility(View.GONE);
         }
-        CTInflaterUtils.getIdByName(activity, "id", "statusbarutil_translucent_view");
+        YyInflaterUtils.getIdByName(activity, "id", "statusbarutil_translucent_view");
         View fakeTranslucentView = decorView.findViewById(FAKE_TRANSLUCENT_VIEW_ID);
         if (fakeTranslucentView != null) {
             fakeTranslucentView.setVisibility(View.GONE);
@@ -527,7 +527,7 @@ public class StatusBarUtil {
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private static void clearPreviousSetting(Activity activity) {
         ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
-        FAKE_STATUS_BAR_VIEW_ID = CTInflaterUtils.getIdByName(activity, "id", "statusbarutil_fake_status_bar_view");
+        FAKE_STATUS_BAR_VIEW_ID = YyInflaterUtils.getIdByName(activity, "id", "statusbarutil_fake_status_bar_view");
         View fakeStatusBarView = decorView.findViewById(FAKE_STATUS_BAR_VIEW_ID);
         if (fakeStatusBarView != null) {
             decorView.removeView(fakeStatusBarView);
@@ -544,7 +544,7 @@ public class StatusBarUtil {
      */
     private static void addTranslucentView(Activity activity, @IntRange(from = 0, to = 255) int statusBarAlpha) {
         ViewGroup contentView = (ViewGroup) activity.findViewById(android.R.id.content);
-        CTInflaterUtils.getIdByName(activity, "id", "statusbarutil_translucent_view");
+        YyInflaterUtils.getIdByName(activity, "id", "statusbarutil_translucent_view");
         View fakeTranslucentView = contentView.findViewById(FAKE_TRANSLUCENT_VIEW_ID);
         if (fakeTranslucentView != null) {
             if (fakeTranslucentView.getVisibility() == View.GONE) {
@@ -582,7 +582,7 @@ public class StatusBarUtil {
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity));
         statusBarView.setLayoutParams(params);
         statusBarView.setBackgroundColor(calculateStatusColor(color, alpha));
-        FAKE_STATUS_BAR_VIEW_ID = CTInflaterUtils.getIdByName(activity, "id", "statusbarutil_fake_status_bar_view");
+        FAKE_STATUS_BAR_VIEW_ID = YyInflaterUtils.getIdByName(activity, "id", "statusbarutil_fake_status_bar_view");
         statusBarView.setId(FAKE_STATUS_BAR_VIEW_ID);
         return statusBarView;
     }
@@ -644,7 +644,7 @@ public class StatusBarUtil {
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity));
         statusBarView.setLayoutParams(params);
         statusBarView.setBackgroundColor(Color.argb(alpha, 0, 0, 0));
-        CTInflaterUtils.getIdByName(activity, "id", "statusbarutil_translucent_view");
+        YyInflaterUtils.getIdByName(activity, "id", "statusbarutil_translucent_view");
         statusBarView.setId(FAKE_TRANSLUCENT_VIEW_ID);
         return statusBarView;
     }

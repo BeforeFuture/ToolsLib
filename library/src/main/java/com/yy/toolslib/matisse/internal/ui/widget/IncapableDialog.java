@@ -24,7 +24,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 
 public class IncapableDialog extends DialogFragment {
 
@@ -53,7 +53,7 @@ public class IncapableDialog extends DialogFragment {
         if (!TextUtils.isEmpty(message)) {
             builder.setMessage(message);
         }
-        builder.setPositiveButton(CTInflaterUtils.getString(getActivity(), "button_ok"), new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(YyInflaterUtils.getString(getActivity(), "button_ok"), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

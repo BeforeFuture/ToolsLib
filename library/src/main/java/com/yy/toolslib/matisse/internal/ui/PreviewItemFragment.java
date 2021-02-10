@@ -32,7 +32,7 @@ import com.yy.toolslib.matisse.internal.entity.Item;
 import com.yy.toolslib.matisse.internal.entity.SelectionSpec;
 import com.yy.toolslib.matisse.internal.utils.PhotoMetadataUtils;
 import com.yy.toolslib.matisse.listener.OnFragmentInteractionListener;
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 import it.sephiroth.android.library.imagezoom.ImageViewTouchBase;
@@ -52,7 +52,7 @@ public class PreviewItemFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(CTInflaterUtils.getLayout(this.getActivity(),"fragment_preview_item"), container, false);
+        return inflater.inflate(YyInflaterUtils.getLayout(this.getActivity(),"fragment_preview_item"), container, false);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class PreviewItemFragment extends Fragment {
                     try {
                         startActivity(intent);
                     } catch (ActivityNotFoundException e) {
-                        Toast.makeText(getContext(), CTInflaterUtils.getString(view.getContext(),"error_no_video_activity"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), YyInflaterUtils.getString(view.getContext(),"error_no_video_activity"), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -82,7 +82,7 @@ public class PreviewItemFragment extends Fragment {
             videoPlayButton.setVisibility(View.GONE);
         }
 
-        ImageViewTouch image = (ImageViewTouch) view.findViewById(CTInflaterUtils.getControl(this.getActivity(),"image_view"));
+        ImageViewTouch image = (ImageViewTouch) view.findViewById(YyInflaterUtils.getControl(this.getActivity(),"image_view"));
         image.setDisplayType(ImageViewTouchBase.DisplayType.FIT_TO_SCREEN);
 
         image.setSingleTapListener(new ImageViewTouch.OnImageViewTouchSingleTapListener() {

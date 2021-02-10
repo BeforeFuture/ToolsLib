@@ -29,7 +29,7 @@ import android.widget.TextView;
 
 import com.yy.toolslib.matisse.internal.entity.Album;
 import com.yy.toolslib.matisse.internal.entity.SelectionSpec;
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 
 import java.io.File;
 
@@ -41,7 +41,7 @@ public class AlbumsAdapter extends CursorAdapter {
         super(context, c, autoRequery);
 
         TypedArray ta = context.getTheme().obtainStyledAttributes(
-                new int[]{CTInflaterUtils.getIdByName(context, "attr", "album_thumbnail_placeholder")});
+                new int[]{YyInflaterUtils.getIdByName(context, "attr", "album_thumbnail_placeholder")});
         mPlaceholder = ta.getDrawable(0);
         ta.recycle();
     }
@@ -50,25 +50,25 @@ public class AlbumsAdapter extends CursorAdapter {
         super(context, c, flags);
 
         TypedArray ta = context.getTheme().obtainStyledAttributes(
-                new int[]{CTInflaterUtils.getIdByName(context, "attr", "album_thumbnail_placeholder")});
+                new int[]{YyInflaterUtils.getIdByName(context, "attr", "album_thumbnail_placeholder")});
         mPlaceholder = ta.getDrawable(0);
         ta.recycle();
     }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(CTInflaterUtils.getLayout(context, "album_list_item"), parent, false);
+        return LayoutInflater.from(context).inflate(YyInflaterUtils.getLayout(context, "album_list_item"), parent, false);
     }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         Album album = Album.valueOf(cursor);
-        ((TextView) view.findViewById(CTInflaterUtils.getControl(context, "album_name"))).setText(album.getDisplayName(context));
-        ((TextView) view.findViewById(CTInflaterUtils.getControl(context, "album_media_count"))).setText(String.valueOf(album.getCount()));
+        ((TextView) view.findViewById(YyInflaterUtils.getControl(context, "album_name"))).setText(album.getDisplayName(context));
+        ((TextView) view.findViewById(YyInflaterUtils.getControl(context, "album_media_count"))).setText(String.valueOf(album.getCount()));
 
         // do not need to load animated Gif
         SelectionSpec.getInstance().imageEngine.loadThumbnail(context, context.getResources().getDimensionPixelSize(
-                CTInflaterUtils.getIdByName(context, "dimen", "media_grid_size")), mPlaceholder,
-                (ImageView) view.findViewById(CTInflaterUtils.getControl(context, "album_cover")), Uri.fromFile(new File(album.getCoverPath())));
+                YyInflaterUtils.getIdByName(context, "dimen", "media_grid_size")), mPlaceholder,
+                (ImageView) view.findViewById(YyInflaterUtils.getControl(context, "album_cover")), Uri.fromFile(new File(album.getCoverPath())));
     }
 }

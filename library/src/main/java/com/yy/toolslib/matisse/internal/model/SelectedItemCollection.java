@@ -27,7 +27,7 @@ import com.yy.toolslib.matisse.internal.entity.SelectionSpec;
 import com.yy.toolslib.matisse.internal.ui.widget.CheckView;
 import com.yy.toolslib.matisse.internal.utils.PathUtils;
 import com.yy.toolslib.matisse.internal.utils.PhotoMetadataUtils;
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -180,19 +180,19 @@ public class SelectedItemCollection {
                 );
             } catch (Resources.NotFoundException e) {
                 cause = mContext.getString(
-                        CTInflaterUtils.getString(mContext,"error_over_count"),
+                        YyInflaterUtils.getString(mContext,"error_over_count"),
                         maxSelectable
                 );
             } catch (NoClassDefFoundError e) {
                 cause = mContext.getString(
-                        CTInflaterUtils.getString(mContext,"error_over_count"),
+                        YyInflaterUtils.getString(mContext,"error_over_count"),
                         maxSelectable
                 );
             }
 
             return new IncapableCause(cause);
         } else if (typeConflict(item)) {
-            return new IncapableCause(mContext.getString( CTInflaterUtils.getString(mContext,"error_type_conflict")));
+            return new IncapableCause(mContext.getString( YyInflaterUtils.getString(mContext,"error_type_conflict")));
         }
 
         return PhotoMetadataUtils.isAcceptable(mContext, item);

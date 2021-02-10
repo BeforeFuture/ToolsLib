@@ -29,7 +29,7 @@ import android.view.ViewStub;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 
 import static com.just.agentweb.AgentWebConfig.WEBVIEW_DEFAULT_TYPE;
 
@@ -200,7 +200,7 @@ public class DefaultWebCreator implements WebCreator {
     private ViewGroup createLayout() {
         Activity mActivity = this.mActivity;
         WebParentLayout mFrameLayout = new WebParentLayout(mActivity);
-        mFrameLayout.setId(CTInflaterUtils.getIdByName(mActivity,"id","web_parent_layout_id"));
+        mFrameLayout.setId(YyInflaterUtils.getIdByName(mActivity,"id","web_parent_layout_id"));
         mFrameLayout.setBackgroundColor(Color.WHITE);
         View target = mIWebLayout == null ? (this.mWebView = (WebView) createWebView()) : webLayout();
         FrameLayout.LayoutParams mLayoutParams = new FrameLayout.LayoutParams(-1, -1);
@@ -211,7 +211,7 @@ public class DefaultWebCreator implements WebCreator {
             this.mWebViewType = AgentWebConfig.WEBVIEW_AGENTWEB_SAFE_TYPE;
         }
         ViewStub mViewStub = new ViewStub(mActivity);
-        mViewStub.setId(CTInflaterUtils.getIdByName(mActivity,"id","mainframe_error_viewsub_id"));
+        mViewStub.setId(YyInflaterUtils.getIdByName(mActivity,"id","mainframe_error_viewsub_id"));
         mFrameLayout.addView(mViewStub, new FrameLayout.LayoutParams(-1, -1));
         if (mIsNeedDefaultProgress) {
             FrameLayout.LayoutParams lp = null;

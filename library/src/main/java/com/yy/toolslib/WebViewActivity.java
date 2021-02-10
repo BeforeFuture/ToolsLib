@@ -40,7 +40,7 @@ import com.just.agentweb.PermissionInterceptor;
 import com.just.agentweb.WebChromeClient;
 import com.yy.toolslib.agentweb.UIController;
 import com.yy.toolslib.jsinterface.AndroidInterface;
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 import com.yy.toolslib.utils.CommonUtils;
 import com.yy.toolslib.utils.LogUtils;
 import com.yy.toolslib.utils.StatusBarUtil;
@@ -75,11 +75,11 @@ public class WebViewActivity extends ToolsBaseActivity {
 
         webview = findViewById(getId("webview"));
         progress_gif_iv = findViewById(getId("progress_gif_iv"));
-        RelativeLayout titleLayout = findViewById(CTInflaterUtils.getControl(this, "title_layout"));
+        RelativeLayout titleLayout = findViewById(YyInflaterUtils.getControl(this, "title_layout"));
         titleLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-        View view = findViewById(CTInflaterUtils.getControl(this, "fakeStatusBarView"));
+        View view = findViewById(YyInflaterUtils.getControl(this, "fakeStatusBarView"));
         view.setBackgroundColor(Color.parseColor("#ffffff"));
-        txtTitle = findViewById(CTInflaterUtils.getControl(this, "tv_header_title"));
+        txtTitle = findViewById(YyInflaterUtils.getControl(this, "tv_header_title"));
         txtTitle.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
         txtTitle.setTextColor(Color.parseColor("#000000"));
         if (null != getIntent() && getIntent().hasExtra("title")) {
@@ -88,8 +88,8 @@ public class WebViewActivity extends ToolsBaseActivity {
             title = getIntent().getStringExtra("game_center");
         }
         txtTitle.setText(title);
-        ImageView ivBack = findViewById(CTInflaterUtils.getControl(this, "iv_header_back"));
-        ivBack.setImageResource(CTInflaterUtils.getDrawable(this, "ic_back_black"));
+        ImageView ivBack = findViewById(YyInflaterUtils.getControl(this, "iv_header_back"));
+        ivBack.setImageResource(YyInflaterUtils.getDrawable(this, "ic_back_black"));
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +104,7 @@ public class WebViewActivity extends ToolsBaseActivity {
         url = getIntent().getStringExtra(KEY_URL);
 
         Glide.with(this)
-                .load(CTInflaterUtils.getDrawable(this, "loading"))
+                .load(YyInflaterUtils.getDrawable(this, "loading"))
                 .asGif()
                 .into(progress_gif_iv);
 

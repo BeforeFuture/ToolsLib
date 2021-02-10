@@ -16,7 +16,7 @@ import com.yy.toolslib.matisse.MimeType;
 import com.yy.toolslib.matisse.internal.entity.CaptureStrategy;
 import com.yy.toolslib.oaid.DeviceOAID;
 import com.yy.toolslib.oaid.IGetter;
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 import com.yy.toolslib.utils.GlideImageEngine;
 import com.yy.toolslib.utils.LogUtils;
 
@@ -33,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
         //获取oaid
         DeviceOAID.with(this).doGet(iGetter);
-
-
     }
 
 
@@ -72,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         Matisse.from(activity)
                 .isAllowPreview(isAllowPreview)
                 .choose(MimeType.ofImage())//, true //参数1 显示资源类型 参数2 是否可以同时选择不同的资源类型 true表示不可以 false表示可以
-                .theme(CTInflaterUtils.getIdByName(activity, "style", "CustomView")) //选择主题 默认是蓝色主题，Matisse_Dracula为黑色主题
+                .theme(YyInflaterUtils.getIdByName(activity, "style", "CustomView")) //选择主题 默认是蓝色主题，Matisse_Dracula为黑色主题
                 .showSingleMediaType(true)//只展示图片
                 .countable(true) //是否显示数字
                 .capture(true)  //是否可以拍照
@@ -87,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 .forResult(1);//设置requestcode,开启Matisse主页面
     }
 
-    public void clicl(View view) {
+    public void click(View view) {
         takePhotoAndSelectPicture(this, 9, 1, false);
     }
 

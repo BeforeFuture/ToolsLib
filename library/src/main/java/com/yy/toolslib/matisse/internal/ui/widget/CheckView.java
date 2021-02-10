@@ -32,7 +32,7 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 
 public class CheckView extends View {
 
@@ -87,16 +87,16 @@ public class CheckView extends View {
         mStrokePaint.setStyle(Paint.Style.STROKE);
         mStrokePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
         mStrokePaint.setStrokeWidth(STROKE_WIDTH * mDensity);
-        TypedArray ta = getContext().getTheme().obtainStyledAttributes(new int[]{CTInflaterUtils.getIdByName(context,"attr","item_checkCircle_borderColor")});
+        TypedArray ta = getContext().getTheme().obtainStyledAttributes(new int[]{YyInflaterUtils.getIdByName(context,"attr","item_checkCircle_borderColor")});
         int defaultColor = ResourcesCompat.getColor(
-                getResources(), CTInflaterUtils.getIdByName(context,"color","zhihu_item_checkCircle_borderColor"),
+                getResources(), YyInflaterUtils.getIdByName(context,"color","zhihu_item_checkCircle_borderColor"),
                 getContext().getTheme());
         int color = ta.getColor(0, defaultColor);
         ta.recycle();
         mStrokePaint.setColor(color);
 
         mCheckDrawable = ResourcesCompat.getDrawable(context.getResources(),
-               CTInflaterUtils.getIdByName(context,"drawable","ic_check_white_18dp"), context.getTheme());
+               YyInflaterUtils.getIdByName(context,"drawable","ic_check_white_18dp"), context.getTheme());
     }
 
     public void setChecked(boolean checked) {
@@ -198,9 +198,9 @@ public class CheckView extends View {
             mBackgroundPaint.setAntiAlias(true);
             mBackgroundPaint.setStyle(Paint.Style.FILL);
             TypedArray ta = getContext().getTheme()
-                    .obtainStyledAttributes(new int[]{CTInflaterUtils.getIdByName(mContext,"attr","item_checkCircle_backgroundColor")});
+                    .obtainStyledAttributes(new int[]{YyInflaterUtils.getIdByName(mContext,"attr","item_checkCircle_backgroundColor")});
             int defaultColor = ResourcesCompat.getColor(
-                    getResources(), CTInflaterUtils.getIdByName(mContext,"color","zhihu_item_checkCircle_backgroundColor"),
+                    getResources(), YyInflaterUtils.getIdByName(mContext,"color","zhihu_item_checkCircle_backgroundColor"),
                     getContext().getTheme());
             int color = ta.getColor(0, defaultColor);
             ta.recycle();

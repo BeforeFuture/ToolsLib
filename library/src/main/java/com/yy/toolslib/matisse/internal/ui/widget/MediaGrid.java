@@ -27,7 +27,7 @@ import android.widget.TextView;
 
 import com.yy.toolslib.matisse.internal.entity.Item;
 import com.yy.toolslib.matisse.internal.entity.SelectionSpec;
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 
 public class MediaGrid extends SquareFrameLayout implements View.OnClickListener {
 
@@ -51,12 +51,12 @@ public class MediaGrid extends SquareFrameLayout implements View.OnClickListener
     }
 
     private void init(Context context) {
-        LayoutInflater.from(context).inflate(CTInflaterUtils.getLayout(context,"media_grid_content"), this, true);
+        LayoutInflater.from(context).inflate(YyInflaterUtils.getLayout(context,"media_grid_content"), this, true);
 
-        mThumbnail =  findViewById(CTInflaterUtils.getControl(context,"media_thumbnail"));
-        mCheckView =   findViewById(CTInflaterUtils.getControl(context,"check_view"));
-        mGifTag =  findViewById(CTInflaterUtils.getControl(context,"gif"));
-        mVideoDuration =  findViewById(CTInflaterUtils.getControl(context,"video_duration"));
+        mThumbnail =  findViewById(YyInflaterUtils.getControl(context,"media_thumbnail"));
+        mCheckView =   findViewById(YyInflaterUtils.getControl(context,"check_view"));
+        mGifTag =  findViewById(YyInflaterUtils.getControl(context,"gif"));
+        mVideoDuration =  findViewById(YyInflaterUtils.getControl(context,"video_duration"));
 
         mThumbnail.setOnClickListener(this);
         mCheckView.setOnClickListener(this);

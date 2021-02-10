@@ -50,7 +50,7 @@ import com.yy.toolslib.matisse.internal.ui.widget.IncapableDialog;
 import com.yy.toolslib.matisse.internal.utils.MediaStoreCompat;
 import com.yy.toolslib.matisse.internal.utils.PathUtils;
 import com.yy.toolslib.matisse.internal.utils.PhotoMetadataUtils;
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 import com.yy.toolslib.utils.StatusBarUtil;
 
 import java.util.ArrayList;
@@ -105,7 +105,7 @@ public class MatisseActivity extends ToolsBaseActivity implements
 
         setContentView(getLayout("activity_matisse"));
 
-        View view = findViewById(CTInflaterUtils.getControl(this, "fakeStatusBarView"));
+        View view = findViewById(YyInflaterUtils.getControl(this, "fakeStatusBarView"));
         view.setBackgroundColor(Color.parseColor("#1cb6f6"));
 
         if (mSpec.needOrientationRestriction()) {

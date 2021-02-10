@@ -41,7 +41,7 @@ import com.yy.toolslib.matisse.internal.ui.widget.IncapableDialog;
 import com.yy.toolslib.matisse.internal.utils.PhotoMetadataUtils;
 import com.yy.toolslib.matisse.internal.utils.Platform;
 import com.yy.toolslib.matisse.listener.OnFragmentInteractionListener;
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 
 public abstract class BasePreviewActivity extends AppCompatActivity implements View.OnClickListener,
         ViewPager.OnPageChangeListener, OnFragmentInteractionListener {
@@ -154,8 +154,8 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
 
                 int count = countOverMaxSize();
                 if (count > 0) {
-                    IncapableDialog incapableDialog = IncapableDialog.newInstance(BasePreviewActivity.this,  getString(CTInflaterUtils.getString(BasePreviewActivity.this, "tips")),
-                            getString(CTInflaterUtils.getString(BasePreviewActivity.this, "error_over_original_count"), count, mSpec.originalMaxSize));
+                    IncapableDialog incapableDialog = IncapableDialog.newInstance(BasePreviewActivity.this,  getString(YyInflaterUtils.getString(BasePreviewActivity.this, "tips")),
+                            getString(YyInflaterUtils.getString(BasePreviewActivity.this, "error_over_original_count"), count, mSpec.originalMaxSize));
                     incapableDialog.show(getSupportFragmentManager(),
                             IncapableDialog.class.getName());
                     return;
@@ -272,14 +272,14 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
     private void updateApplyButton() {
         int selectedCount = mSelectedCollection.count();
         if (selectedCount == 0) {
-            mButtonApply.setText(CTInflaterUtils.getString(this,"button_sure_default"));
+            mButtonApply.setText(YyInflaterUtils.getString(this,"button_sure_default"));
             mButtonApply.setEnabled(false);
         } else if (selectedCount == 1 && mSpec.singleSelectionModeEnabled()) {
-            mButtonApply.setText(CTInflaterUtils.getString(this,"button_sure_default"));
+            mButtonApply.setText(YyInflaterUtils.getString(this,"button_sure_default"));
             mButtonApply.setEnabled(true);
         } else {
             mButtonApply.setEnabled(true);
-            mButtonApply.setText(getString(CTInflaterUtils.getString(this,"button_sure"), selectedCount));
+            mButtonApply.setText(getString(YyInflaterUtils.getString(this,"button_sure"), selectedCount));
         }
 
         if (mSpec.originalable) {
@@ -302,8 +302,8 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
             if (mOriginalEnable) {
 
 
-                IncapableDialog incapableDialog = IncapableDialog.newInstance(BasePreviewActivity.this, getString(CTInflaterUtils.getString(BasePreviewActivity.this, "tips")),
-                        getString(CTInflaterUtils.getString(BasePreviewActivity.this, "error_over_original_size"), mSpec.originalMaxSize));
+                IncapableDialog incapableDialog = IncapableDialog.newInstance(BasePreviewActivity.this, getString(YyInflaterUtils.getString(BasePreviewActivity.this, "tips")),
+                        getString(YyInflaterUtils.getString(BasePreviewActivity.this, "error_over_original_size"), mSpec.originalMaxSize));
                 incapableDialog.show(getSupportFragmentManager(),
                         IncapableDialog.class.getName());
 

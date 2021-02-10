@@ -1,4 +1,4 @@
-package com.yy.toolslib.view.datepicker;
+package com.yy.toolslib.weight.datepicker;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
@@ -12,7 +12,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.yy.toolslib.utils.CTInflaterUtils;
+import com.yy.toolslib.utils.YyInflaterUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -89,11 +89,11 @@ public class CustomDatePicker {
 
     private void initDialog() {
         if (datePickerDialog == null) {
-            datePickerDialog = new Dialog(context, CTInflaterUtils.getIdByName(context, "style", "time_dialog"));
+            datePickerDialog = new Dialog(context, YyInflaterUtils.getIdByName(context, "style", "time_dialog"));
             datePickerDialog.setCancelable(true);
             datePickerDialog.setCanceledOnTouchOutside(false);
             datePickerDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            datePickerDialog.setContentView(CTInflaterUtils.getLayout(context, "custom_date_picker"));
+            datePickerDialog.setContentView(YyInflaterUtils.getLayout(context, "custom_date_picker"));
             Window window = datePickerDialog.getWindow();
             window.setGravity(Gravity.BOTTOM);
             WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -106,15 +106,15 @@ public class CustomDatePicker {
     }
 
     private void initView() {
-        year_pv = (DatePickerView) datePickerDialog.findViewById(CTInflaterUtils.getControl(context, "year_pv"));
-        month_pv = (DatePickerView) datePickerDialog.findViewById(CTInflaterUtils.getControl(context, "month_pv"));
-        day_pv = (DatePickerView) datePickerDialog.findViewById(CTInflaterUtils.getControl(context, "day_pv"));
-        hour_pv = (DatePickerView) datePickerDialog.findViewById(CTInflaterUtils.getControl(context, "hour_pv"));
-        minute_pv = (DatePickerView) datePickerDialog.findViewById(CTInflaterUtils.getControl(context, "minute_pv"));
-        cancle_iv = (ImageView) datePickerDialog.findViewById(CTInflaterUtils.getControl(context, "date_picker_cancel_iv"));
-        select_iv = (ImageView) datePickerDialog.findViewById(CTInflaterUtils.getControl(context, "date_picker_select_iv"));
-        hour_text = (TextView) datePickerDialog.findViewById(CTInflaterUtils.getControl(context, "hour_text"));
-        minute_text = (TextView) datePickerDialog.findViewById(CTInflaterUtils.getControl(context, "minute_text"));
+        year_pv = (DatePickerView) datePickerDialog.findViewById(YyInflaterUtils.getControl(context, "year_pv"));
+        month_pv = (DatePickerView) datePickerDialog.findViewById(YyInflaterUtils.getControl(context, "month_pv"));
+        day_pv = (DatePickerView) datePickerDialog.findViewById(YyInflaterUtils.getControl(context, "day_pv"));
+        hour_pv = (DatePickerView) datePickerDialog.findViewById(YyInflaterUtils.getControl(context, "hour_pv"));
+        minute_pv = (DatePickerView) datePickerDialog.findViewById(YyInflaterUtils.getControl(context, "minute_pv"));
+        cancle_iv = (ImageView) datePickerDialog.findViewById(YyInflaterUtils.getControl(context, "date_picker_cancel_iv"));
+        select_iv = (ImageView) datePickerDialog.findViewById(YyInflaterUtils.getControl(context, "date_picker_select_iv"));
+        hour_text = (TextView) datePickerDialog.findViewById(YyInflaterUtils.getControl(context, "hour_text"));
+        minute_text = (TextView) datePickerDialog.findViewById(YyInflaterUtils.getControl(context, "minute_text"));
 
         cancle_iv.setOnClickListener(new View.OnClickListener() {
             @Override
