@@ -10,14 +10,14 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.NavigatorHelper;
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.ScrollState;
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.abs.IPagerNavigator;
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IMeasurablePagerTitleView;
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.buildins.commonnavigator.model.PositionData;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.NavigatorHelper;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.ScrollState;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.abs.IPagerNavigator;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IMeasurablePagerTitleView;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.buildins.commonnavigator.model.PositionData;
 
 import java.util.ArrayList;
 import java.util.List;

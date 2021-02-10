@@ -10,8 +10,8 @@ import android.view.ViewConfiguration;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.abs.IPagerNavigator;
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.buildins.UIUtil;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.abs.IPagerNavigator;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.buildins.UIUtil;
 
 import java.util.ArrayList;
 import java.util.List;

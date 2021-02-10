@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.abs.IPagerNavigator;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.abs.IPagerNavigator;
 
 /**
  * 整个框架的入口，核心

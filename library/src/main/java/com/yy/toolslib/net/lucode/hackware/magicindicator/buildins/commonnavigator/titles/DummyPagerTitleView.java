@@ -3,7 +3,7 @@ package com.yy.toolslib.net.lucode.hackware.magicindicator.buildins.commonnaviga
 import android.content.Context;
 import android.view.View;
 
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
 
 /**
  * 空指示器标题，用于只需要指示器而不需要title的需求

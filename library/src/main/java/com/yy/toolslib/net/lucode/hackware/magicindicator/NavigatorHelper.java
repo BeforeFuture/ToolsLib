@@ -20,7 +20,7 @@ public class NavigatorHelper {
     private int mScrollState;
 
     private boolean mSkimOver;
-    private  com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.NavigatorHelper.OnNavigatorScrollListener mNavigatorScrollListener;
+    private  com.yy.toolslib.net.lucode.hackware.magicindicator.NavigatorHelper.OnNavigatorScrollListener mNavigatorScrollListener;
 
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         float currentPositionOffsetSum = position + positionOffset;
@@ -132,7 +132,7 @@ public class NavigatorHelper {
         mScrollState = state;
     }
 
-    public void setNavigatorScrollListener( com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.NavigatorHelper.OnNavigatorScrollListener navigatorScrollListener) {
+    public void setNavigatorScrollListener( com.yy.toolslib.net.lucode.hackware.magicindicator.NavigatorHelper.OnNavigatorScrollListener navigatorScrollListener) {
         mNavigatorScrollListener = navigatorScrollListener;
     }
 

@@ -9,11 +9,11 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.FragmentContainerHelper;
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.buildins.ArgbEvaluatorHolder;
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.buildins.UIUtil;
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
-import com.mchsdk.paysdk.view.net.lucode.hackware.magicindicator.buildins.commonnavigator.model.PositionData;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.FragmentContainerHelper;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.buildins.ArgbEvaluatorHolder;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.buildins.UIUtil;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import com.yy.toolslib.net.lucode.hackware.magicindicator.buildins.commonnavigator.model.PositionData;
 
 import java.util.Arrays;
 import java.util.List;
