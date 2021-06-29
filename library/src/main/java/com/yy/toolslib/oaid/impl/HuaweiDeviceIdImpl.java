@@ -33,7 +33,7 @@ import android.support.annotation.RestrictTo;
 
 import com.yy.toolslib.oaid.IDeviceId;
 import com.yy.toolslib.oaid.IGetter;
-import com.yy.toolslib.utils.LogUtils;
+import com.yy.toolslib.utils.Logger;
 import com.uodis.opendevice.aidl.OpenDeviceIdentifierService;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
@@ -51,7 +51,7 @@ public class HuaweiDeviceIdImpl implements IDeviceId {
             PackageInfo pi = context.getPackageManager().getPackageInfo("com.huawei.hwid", 0);
             return pi != null;
         } catch (Exception e) {
-            LogUtils.i(TAG, e.toString());
+            Logger.i(TAG, e.toString());
             return false;
         }
     }
@@ -63,7 +63,7 @@ public class HuaweiDeviceIdImpl implements IDeviceId {
         boolean isBinded = context.bindService(intent, new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-                LogUtils.i(TAG, "Huawei OPENIDS_SERVICE connected");
+                Logger.i(TAG, "Huawei OPENIDS_SERVICE connected");
                 try {
                     OpenDeviceIdentifierService anInterface = OpenDeviceIdentifierService.Stub.asInterface(service);
                     String IDs = anInterface.getIDs();
@@ -73,7 +73,7 @@ public class HuaweiDeviceIdImpl implements IDeviceId {
                         getter.onDeviceIdGetComplete(IDs);
                     }
                 } catch (Exception e) {
-                    LogUtils.i(TAG, e.toString());
+                    Logger.i(TAG, e.toString());
                     getter.onDeviceIdGetError(e);
                 } finally {
                     context.unbindService(this);
@@ -82,7 +82,7 @@ public class HuaweiDeviceIdImpl implements IDeviceId {
 
             @Override
             public void onServiceDisconnected(ComponentName name) {
-                LogUtils.i(TAG, "Huawei OPENIDS_SERVICE disconnected");
+                Logger.i(TAG, "Huawei OPENIDS_SERVICE disconnected");
             }
         }, Context.BIND_AUTO_CREATE);
         if (!isBinded) {

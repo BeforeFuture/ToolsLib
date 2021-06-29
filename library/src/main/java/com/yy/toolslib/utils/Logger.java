@@ -8,7 +8,7 @@ import com.yy.library.BuildConfig;
 /**
  * Log封装
  */
-public class LogUtils {
+public class Logger {
 
 
     /**

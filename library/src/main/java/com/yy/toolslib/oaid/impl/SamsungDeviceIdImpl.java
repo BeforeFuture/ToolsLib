@@ -33,7 +33,7 @@ import android.support.annotation.RestrictTo;
 
 import com.yy.toolslib.oaid.IDeviceId;
 import com.yy.toolslib.oaid.IGetter;
-import com.yy.toolslib.utils.LogUtils;
+import com.yy.toolslib.utils.Logger;
 import com.samsung.android.deviceidservice.IDeviceIdService;
 
 import java.lang.reflect.Method;
@@ -53,7 +53,7 @@ public class SamsungDeviceIdImpl implements IDeviceId {
             PackageInfo pi = context.getPackageManager().getPackageInfo("com.samsung.android.deviceidservice", 0);
             return pi != null;
         } catch (Exception e) {
-            LogUtils.i(TAG, e.toString());
+            Logger.i(TAG, e.toString());
             return false;
         }
     }
@@ -65,7 +65,7 @@ public class SamsungDeviceIdImpl implements IDeviceId {
         boolean isBinded = context.bindService(intent, new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-                LogUtils.i(TAG, "Samsung DeviceIdService connected");
+                Logger.i(TAG, "Samsung DeviceIdService connected");
                 try {
                     //IDeviceIdService anInterface = new IDeviceIdService.Stub.asInterface(service);
                     Method asInterface = IDeviceIdService.Stub.class.getDeclaredMethod("asInterface", IBinder.class);
@@ -77,7 +77,7 @@ public class SamsungDeviceIdImpl implements IDeviceId {
                         getter.onDeviceIdGetComplete(deviceId);
                     }
                 } catch (Exception e) {
-                    LogUtils.i(TAG, e.toString());
+                    Logger.i(TAG, e.toString());
                     getter.onDeviceIdGetError(e);
                 } finally {
                     context.unbindService(this);
@@ -86,7 +86,7 @@ public class SamsungDeviceIdImpl implements IDeviceId {
 
             @Override
             public void onServiceDisconnected(ComponentName name) {
-                LogUtils.i(TAG, "Samsung DeviceIdService disconnected");
+                Logger.i(TAG, "Samsung DeviceIdService disconnected");
             }
         }, Context.BIND_AUTO_CREATE);
         if (!isBinded) {

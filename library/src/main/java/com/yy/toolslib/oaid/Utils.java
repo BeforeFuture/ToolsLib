@@ -27,7 +27,7 @@ import android.os.Build;
 import android.support.annotation.RestrictTo;
 import android.text.TextUtils;
 
-import com.yy.toolslib.utils.LogUtils;
+import com.yy.toolslib.utils.Logger;
 
 import java.lang.reflect.Method;
 
@@ -43,7 +43,7 @@ public class Utils {
             Method method = clazz.getMethod("get", String.class, String.class);
             res = (String) method.invoke(clazz, new Object[]{key, defValue});
         } catch (Exception e) {
-            LogUtils.i(TAG, e.getMessage());
+            Logger.i(TAG, e.getMessage());
         }
         if (res == null) {
             res = "";

@@ -31,7 +31,7 @@ import android.support.annotation.RestrictTo;
 import com.yy.toolslib.oaid.IDeviceId;
 import com.yy.toolslib.oaid.IGetter;
 import com.yy.toolslib.oaid.Utils;
-import com.yy.toolslib.utils.LogUtils;
+import com.yy.toolslib.utils.Logger;
 
 import java.util.Objects;
 
@@ -56,13 +56,13 @@ public class VivoDeviceIdImpl implements IDeviceId {
             Objects.requireNonNull(cursor).moveToFirst();
             String ret = cursor.getString(cursor.getColumnIndex("value"));
             if (ret != null && ret.length() > 0) {
-                 LogUtils.i(TAG, "oaid from provider: " + uri);
+                 Logger.i(TAG, "oaid from provider: " + uri);
                 getter.onDeviceIdGetComplete(ret);
             } else {
                 getter.onDeviceIdGetError(new RuntimeException("OAID query failed"));
             }
         } catch (Exception e) {
-             LogUtils.i(TAG, e.toString());
+             Logger.i(TAG, e.toString());
             getter.onDeviceIdGetError(e);
         }
     }

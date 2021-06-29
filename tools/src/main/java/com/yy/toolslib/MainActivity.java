@@ -18,7 +18,7 @@ import com.yy.toolslib.oaid.DeviceOAID;
 import com.yy.toolslib.oaid.IGetter;
 import com.yy.toolslib.utils.YyInflaterUtils;
 import com.yy.toolslib.utils.GlideImageEngine;
-import com.yy.toolslib.utils.LogUtils;
+import com.yy.toolslib.utils.Logger;
 
 import java.util.List;
 
@@ -39,12 +39,12 @@ public class MainActivity extends AppCompatActivity {
     IGetter iGetter = new IGetter() {
         @Override
         public void onDeviceIdGetComplete(@NonNull String oaid) {
-            LogUtils.d(TAG, "OAID: " + oaid);
+            Logger.d(TAG, "OAID: " + oaid);
         }
 
         @Override
         public void onDeviceIdGetError(@NonNull Exception exception) {
-            LogUtils.i(TAG, "onDeviceIdGetError: " + exception.getMessage());
+            Logger.i(TAG, "onDeviceIdGetError: " + exception.getMessage());
         }
     };
 

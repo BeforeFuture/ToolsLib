@@ -40,9 +40,9 @@ import com.just.agentweb.PermissionInterceptor;
 import com.just.agentweb.WebChromeClient;
 import com.yy.toolslib.agentweb.UIController;
 import com.yy.toolslib.jsinterface.AndroidInterface;
+import com.yy.toolslib.utils.Logger;
 import com.yy.toolslib.utils.YyInflaterUtils;
 import com.yy.toolslib.utils.CommonUtils;
-import com.yy.toolslib.utils.LogUtils;
 import com.yy.toolslib.utils.StatusBarUtil;
 
 import org.json.JSONObject;
@@ -126,7 +126,7 @@ public class WebViewActivity extends ToolsBaseActivity {
                     .addJavascriptInterface("chaotoo", new AndroidInterface(WebViewActivity.this, mAgentWeb) {
                         @JavascriptInterface
                         public void copy(String text) {
-                            LogUtils.d(TAG, "copy:" + text);
+                            Logger.d(TAG, "copy:" + text);
                             ClipboardManager mClipboardManager = (ClipboardManager) WebViewActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
                             mClipboardManager.setPrimaryClip(ClipData.newPlainText(null, text));
                             Toast.makeText(WebViewActivity.this, "复制成功", Toast.LENGTH_SHORT).show();
@@ -134,19 +134,19 @@ public class WebViewActivity extends ToolsBaseActivity {
 
                         @JavascriptInterface
                         public void openApp() {
-                            LogUtils.d(TAG, "openApp:");
+                            Logger.d(TAG, "openApp:");
                             if (CommonUtils.checkAppInstalled(WebViewActivity.this, "com.chaotoo.gamecenter")) {
-                                LogUtils.d(TAG, "已安装");
+                                Logger.d(TAG, "已安装");
                                 CommonUtils.openApp(WebViewActivity.this, "com.chaotoo.gamecenter");
                             } else {
-                                LogUtils.d(TAG, "没有安装");
+                                Logger.d(TAG, "没有安装");
                                 CommonUtils.downLoadGameApp(WebViewActivity.this, "com.chaotoo.gamecenter");
                             }
                         }
 
                         @JavascriptInterface
                         public void jumpDownApp(String info) {
-                            LogUtils.d(TAG, "jumpDownApp: " + info);
+                            Logger.d(TAG, "jumpDownApp: " + info);
                             try {
                                 JSONObject jsonObject = new JSONObject(info);
                                 if (jsonObject.optInt("type") == 2) {
@@ -165,17 +165,17 @@ public class WebViewActivity extends ToolsBaseActivity {
                                         startActivity(intent);
                                     } else {
                                         if (CommonUtils.checkAppInstalled(WebViewActivity.this, packageName)) {
-                                            LogUtils.d(TAG, "已安装");
+                                            Logger.d(TAG, "已安装");
                                             CommonUtils.openApp(WebViewActivity.this, packageName);
                                         } else {
                                             CommonUtils.downLoadGameApp(WebViewActivity.this, packageName);
-                                            LogUtils.d(TAG, "没有安装");
+                                            Logger.d(TAG, "没有安装");
                                         }
                                     }
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                LogUtils.d(TAG, "jumpDownApp-JSONException" + e.getMessage());
+                                Logger.d(TAG, "jumpDownApp-JSONException" + e.getMessage());
                             }
                         }
 
@@ -198,7 +198,7 @@ public class WebViewActivity extends ToolsBaseActivity {
             //设置webview背景色，为白色
             frameLayout.setBackgroundColor(Color.TRANSPARENT);
             toCleanWebCache();
-            LogUtils.e(TAG, "webview-UserAgent：" + mAgentWeb.getAgentWebSettings().getWebSettings().getUserAgentString());
+            Logger.e(TAG, "webview-UserAgent：" + mAgentWeb.getAgentWebSettings().getWebSettings().getUserAgentString());
             /**
              * 启用mixed content    android 5.0以上默认不支持Mixed Content
              *
@@ -212,7 +212,7 @@ public class WebViewActivity extends ToolsBaseActivity {
             mAgentWeb.getWebCreator().getWebView().getSettings().setDomStorageEnabled(true);
 
         } catch (Exception e) {
-            LogUtils.e(TAG, "webview报错：" + e.getMessage());
+            Logger.e(TAG, "webview报错：" + e.getMessage());
         }
     }
 
@@ -223,9 +223,9 @@ public class WebViewActivity extends ToolsBaseActivity {
         @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-            LogUtils.e(TAG, "getDescription：" + error.getDescription());
-            LogUtils.e(TAG, "getErrorCode：" + error.getErrorCode());
-            LogUtils.e(TAG, "getUrl：" + request.getUrl());
+            Logger.e(TAG, "getDescription：" + error.getDescription());
+            Logger.e(TAG, "getErrorCode：" + error.getErrorCode());
+            Logger.e(TAG, "getUrl：" + request.getUrl());
             super.onReceivedError(view, request, error);
         }
 
@@ -244,7 +244,7 @@ public class WebViewActivity extends ToolsBaseActivity {
         @Override
         public boolean shouldOverrideUrlLoading(final WebView view, String url) {
             //一旦页面中有其他链接被点击了，则显示关闭页面按钮
-            LogUtils.e(TAG, "mWebViewClient shouldOverrideUrlLoading:" + url);
+            Logger.e(TAG, "mWebViewClient shouldOverrideUrlLoading:" + url);
             if (url.contains("chaotoo://xxjlb")) {
 //                if (!url.startsWith("http")) {
                 try {
@@ -257,7 +257,7 @@ public class WebViewActivity extends ToolsBaseActivity {
                 } catch (Exception e) {
                     // 防止没有安装的情况
                     e.printStackTrace();
-                    LogUtils.i(TAG, "您所打开的第三方App未安装！");
+                    Logger.i(TAG, "您所打开的第三方App未安装！");
                     CommonUtils.downLoadGameApp(WebViewActivity.this, "com.chaotoo.gamecenter");
                 }
                 return true;
@@ -268,7 +268,7 @@ public class WebViewActivity extends ToolsBaseActivity {
 
         @Override
         public void onPageStarted(WebView view, String URL, Bitmap favicon) {
-//            LogUtils.e(TAG, "mUrl:" + url + " onPageStarted  target:" + getUrl());
+//            Logger.e(TAG, "mUrl:" + url + " onPageStarted  target:" + getUrl());
             super.onPageStarted(view, URL, favicon);
 
             timer.put(URL, System.currentTimeMillis());
@@ -300,7 +300,7 @@ public class WebViewActivity extends ToolsBaseActivity {
         public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
             super.onReceivedHttpError(view, request, errorResponse);
 
-//            LogUtils.e(TAG, "onReceivedHttpError:" + "  request:" + request.getUrl() + "  errorResponse:" + errorResponse.getReasonPhrase());
+//            Logger.e(TAG, "onReceivedHttpError:" + "  request:" + request.getUrl() + "  errorResponse:" + errorResponse.getReasonPhrase());
         }
 
         @Override
@@ -314,7 +314,7 @@ public class WebViewActivity extends ToolsBaseActivity {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
 //            super.onProgressChanged(view, newProgress);
-//            LogUtils.e(TAG, "onProgressChanged:" + newProgress + "  view:" + view);
+//            Logger.e(TAG, "onProgressChanged:" + newProgress + "  view:" + view);
             if (newProgress >= 99) {
                 progress_gif_iv.setVisibility(View.GONE);
                 webview.setVisibility(View.VISIBLE);
@@ -346,7 +346,7 @@ public class WebViewActivity extends ToolsBaseActivity {
          */
         @Override
         public boolean intercept(String url, String[] permissions, String action) {
-//            LogUtils.e(TAG, "mUrl:" + url + "  permission:" + mGson.toJson(permissions) + " action:" + action);
+//            Logger.e(TAG, "mUrl:" + url + "  permission:" + mGson.toJson(permissions) + " action:" + action);
 
             return false;
         }
@@ -405,11 +405,11 @@ public class WebViewActivity extends ToolsBaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        LogUtils.d(TAG, "requestCode---  " + requestCode);
-        LogUtils.d(TAG, "resultCode---  " + resultCode);
+        Logger.d(TAG, "requestCode---  " + requestCode);
+        Logger.d(TAG, "resultCode---  " + resultCode);
         if (null != data) {
             if (data.hasExtra("type")) {
-                LogUtils.d(TAG, "type---  " + data.getStringExtra("type"));
+                Logger.d(TAG, "type---  " + data.getStringExtra("type"));
             }
         }
 

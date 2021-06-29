@@ -5,7 +5,7 @@
     android:background="@color/background_gray"
     android:orientation="vertical">
 
-    <include layout="@layout/fake_statusbar_and_title_bar" />
+    <include layout="@layout/tools_fake_statusbar_and_title_bar" />
 
     <View
         android:layout_width="match_parent"

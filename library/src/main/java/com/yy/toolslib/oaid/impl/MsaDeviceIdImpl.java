@@ -34,7 +34,7 @@ import android.support.annotation.RestrictTo;
 import com.bun.lib.MsaIdInterface;
 import com.yy.toolslib.oaid.IDeviceId;
 import com.yy.toolslib.oaid.IGetter;
-import com.yy.toolslib.utils.LogUtils;
+import com.yy.toolslib.utils.Logger;
 
 import java.lang.reflect.Method;
 
@@ -53,7 +53,7 @@ public class MsaDeviceIdImpl implements IDeviceId {
             PackageInfo pi = context.getPackageManager().getPackageInfo("com.mdid.msa", 0);
             return pi != null;
         } catch (Exception e) {
-            LogUtils.i(TAG, e.toString());
+            Logger.i(TAG, e.toString());
             return false;
         }
     }
@@ -67,7 +67,7 @@ public class MsaDeviceIdImpl implements IDeviceId {
             intent.putExtra("com.bun.msa.param.runinset", true);
             context.startService(intent);
         } catch (Exception e) {
-            LogUtils.i(TAG, e.toString());
+            Logger.i(TAG, e.toString());
         }
         Intent intent = new Intent("com.bun.msa.action.bindto.service");
         intent.setClassName("com.mdid.msa", "com.mdid.msa.service.MsaIdService");
@@ -75,7 +75,7 @@ public class MsaDeviceIdImpl implements IDeviceId {
         boolean isBinded = context.bindService(intent, new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-                LogUtils.i(TAG, "MsaIdService connected");
+                Logger.i(TAG, "MsaIdService connected");
                 try {
                     //MsaIdInterface anInterface = new MsaIdInterface.Stub.asInterface(service);
                     Method asInterface = MsaIdInterface.Stub.class.getDeclaredMethod("asInterface", IBinder.class);
@@ -87,7 +87,7 @@ public class MsaDeviceIdImpl implements IDeviceId {
                         getter.onDeviceIdGetComplete(oaid);
                     }
                 } catch (Exception e) {
-                    LogUtils.i(TAG, e.toString());
+                    Logger.i(TAG, e.toString());
                     getter.onDeviceIdGetError(e);
                 } finally {
                     context.unbindService(this);
@@ -96,7 +96,7 @@ public class MsaDeviceIdImpl implements IDeviceId {
 
             @Override
             public void onServiceDisconnected(ComponentName name) {
-                LogUtils.i(TAG, "MsaIdService disconnected");
+                Logger.i(TAG, "MsaIdService disconnected");
             }
         }, Context.BIND_AUTO_CREATE);
         if (!isBinded) {

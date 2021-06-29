@@ -38,7 +38,7 @@ import android.support.annotation.RestrictTo;
 import com.heytap.openid.IOpenID;
 import com.yy.toolslib.oaid.IDeviceId;
 import com.yy.toolslib.oaid.IGetter;
-import com.yy.toolslib.utils.LogUtils;
+import com.yy.toolslib.utils.Logger;
 
 import java.lang.reflect.Method;
 import java.security.MessageDigest;
@@ -59,7 +59,7 @@ public class OppoDeviceIdImpl implements IDeviceId {
             PackageInfo pi = context.getPackageManager().getPackageInfo("com.heytap.openid", 0);
             return pi != null;
         } catch (Exception e) {
-            LogUtils.i(TAG, e.toString());
+            Logger.i(TAG, e.toString());
             return false;
         }
     }
@@ -71,7 +71,7 @@ public class OppoDeviceIdImpl implements IDeviceId {
         boolean isBinded = context.bindService(intent, new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-                LogUtils.i(TAG, "HeyTap IdentifyService connected");
+                Logger.i(TAG, "HeyTap IdentifyService connected");
                 try {
                     String ouid = realGetOUID(service);
                     if (ouid == null || ouid.length() == 0) {
@@ -80,7 +80,7 @@ public class OppoDeviceIdImpl implements IDeviceId {
                         getter.onDeviceIdGetComplete(ouid);
                     }
                 } catch (Exception e) {
-                    LogUtils.i(TAG, e.toString());
+                    Logger.i(TAG, e.toString());
                     getter.onDeviceIdGetError(e);
                 } finally {
                     context.unbindService(this);
@@ -89,7 +89,7 @@ public class OppoDeviceIdImpl implements IDeviceId {
 
             @Override
             public void onServiceDisconnected(ComponentName name) {
-                LogUtils.i(TAG, "HeyTap IdentifyService disconnected");
+                Logger.i(TAG, "HeyTap IdentifyService disconnected");
             }
         }, Context.BIND_AUTO_CREATE);
         if (!isBinded) {
@@ -118,7 +118,7 @@ public class OppoDeviceIdImpl implements IDeviceId {
                 IOpenID anInterface = (IOpenID) asInterface.invoke(null, service);
                 return anInterface.getSerID(pkgName, sign, "OUID");
             } catch (Exception e) {
-                LogUtils.i(TAG, e.toString());
+                Logger.i(TAG, e.toString());
             }
         }
         return null;

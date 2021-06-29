@@ -31,7 +31,7 @@ import android.support.annotation.RestrictTo;
 
 import com.yy.toolslib.oaid.IDeviceId;
 import com.yy.toolslib.oaid.IGetter;
-import com.yy.toolslib.utils.LogUtils;
+import com.yy.toolslib.utils.Logger;
 
 import java.util.Objects;
 
@@ -52,7 +52,7 @@ public class MeizuDeviceIdImpl implements IDeviceId {
                 return true;
             }
         } catch (Exception e) {
-             LogUtils.i(TAG, e.toString());
+             Logger.i(TAG, e.toString());
 
         }
         return false;
@@ -74,7 +74,7 @@ public class MeizuDeviceIdImpl implements IDeviceId {
                 getter.onDeviceIdGetError(new RuntimeException("OAID query failed"));
             }
         } catch (Exception e) {
-             LogUtils.i(TAG, e.toString());
+             Logger.i(TAG, e.toString());
             getter.onDeviceIdGetError(e);
         }
     }

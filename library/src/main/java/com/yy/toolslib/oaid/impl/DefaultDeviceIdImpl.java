@@ -31,7 +31,7 @@ import android.text.TextUtils;
 
 import com.yy.toolslib.oaid.IDeviceId;
 import com.yy.toolslib.oaid.IGetter;
-import com.yy.toolslib.utils.LogUtils;
+import com.yy.toolslib.utils.Logger;
 
 import java.util.concurrent.Executors;
 
@@ -79,7 +79,7 @@ public class DefaultDeviceIdImpl implements IDeviceId {
     }
 
     private void writeToSharedPreferences(String guid) {
-        LogUtils.i(TAG, "write guid to SharedPreferences: " + guid);
+        Logger.i(TAG, "write guid to SharedPreferences: " + guid);
         SharedPreferences sp = context.getSharedPreferences(".OAID", Context.MODE_PRIVATE);
         sp.edit().putString("l__y__j", guid).apply();
     }
