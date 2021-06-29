@@ -23,7 +23,7 @@
 
     <include
         android:id="@+id/tt"
-        layout="@layout/fake_statusbar_layout"/>
+        layout="@layout/tools_fake_statusbar_layout"/>
 
     <LinearLayout
         android:id="@+id/titlebar_ll"
