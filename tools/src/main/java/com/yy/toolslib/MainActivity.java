@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,11 +13,8 @@ import android.view.View;
 import com.yy.toolslib.matisse.Matisse;
 import com.yy.toolslib.matisse.MimeType;
 import com.yy.toolslib.matisse.internal.entity.CaptureStrategy;
-import com.yy.toolslib.oaid.DeviceOAID;
-import com.yy.toolslib.oaid.IGetter;
 import com.yy.toolslib.utils.YyInflaterUtils;
 import com.yy.toolslib.utils.GlideImageEngine;
-import com.yy.toolslib.utils.Logger;
 
 import java.util.List;
 
@@ -31,22 +27,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //获取oaid
-        DeviceOAID.with(this).doGet(iGetter);
+
     }
 
 
-    IGetter iGetter = new IGetter() {
-        @Override
-        public void onDeviceIdGetComplete(@NonNull String oaid) {
-            Logger.d(TAG, "OAID: " + oaid);
-        }
 
-        @Override
-        public void onDeviceIdGetError(@NonNull Exception exception) {
-            Logger.i(TAG, "onDeviceIdGetError: " + exception.getMessage());
-        }
-    };
 
     /**
      * 跳转url界面
