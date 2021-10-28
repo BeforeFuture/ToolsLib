@@ -54,7 +54,7 @@ public class DeviceInfo {
         int resourceId = resources.getIdentifier("status_bar_height", "dimen",
                 "android");
         int height = resources.getDimensionPixelSize(resourceId);
-//        CTLog.v(TAG, "fun#getStatusBarHeight height:" + height);
+//        CTLog.v( "fun#getStatusBarHeight height:" + height);
         return height;
     }
 
@@ -85,7 +85,7 @@ public class DeviceInfo {
      */
     public static boolean isFullScream(Activity mContext) {
         int v = mContext.getWindow().getAttributes().flags;
-//        CTLog.v(TAG, mContext.getClass().getSimpleName() + ":" + v
+//        Logger.v( mContext.getClass().getSimpleName() + ":" + v
 //                + "// 全屏 66816 - 非全屏 65792");
         if (66816 == v) {
             return true;
@@ -184,10 +184,10 @@ public class DeviceInfo {
         try {
             con.getPackageManager().getApplicationInfo(packname,
                     PackageManager.GET_UNINSTALLED_PACKAGES);
-//            CTLog.w(TAG, "fun#checkApkExist app " + packname + " exist");
+//            Logger.w( "fun#checkApkExist app " + packname + " exist");
             return true;
         } catch (NameNotFoundException e) {
-//            CTLog.e(TAG, "fun#checkApkExist NameNotFoundException:" + e);
+//            Logger.e( "fun#checkApkExist NameNotFoundException:" + e);
         }
         return false;
     }
@@ -301,7 +301,7 @@ public class DeviceInfo {
         }
 
         if (null == cacheModel) {
-//            CTLog.i(TAG, "null == DeviceInfoModel");
+//            CTLog.i( "null == DeviceInfoModel");
             cacheModel = new DeviceInfoModel();
         }
 

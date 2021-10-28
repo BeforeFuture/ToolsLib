@@ -126,7 +126,7 @@ public class WebViewActivity extends ToolsBaseActivity {
                     .addJavascriptInterface("chaotoo", new AndroidInterface(WebViewActivity.this, mAgentWeb) {
                         @JavascriptInterface
                         public void copy(String text) {
-                            Logger.d(TAG, "copy:" + text);
+                            Logger.d( "copy:" + text);
                             ClipboardManager mClipboardManager = (ClipboardManager) WebViewActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
                             mClipboardManager.setPrimaryClip(ClipData.newPlainText(null, text));
                             Toast.makeText(WebViewActivity.this, "复制成功", Toast.LENGTH_SHORT).show();
@@ -134,19 +134,19 @@ public class WebViewActivity extends ToolsBaseActivity {
 
                         @JavascriptInterface
                         public void openApp() {
-                            Logger.d(TAG, "openApp:");
+                            Logger.d( "openApp:");
                             if (CommonUtils.checkAppInstalled(WebViewActivity.this, "com.chaotoo.gamecenter")) {
-                                Logger.d(TAG, "已安装");
+                                Logger.d( "已安装");
                                 CommonUtils.openApp(WebViewActivity.this, "com.chaotoo.gamecenter");
                             } else {
-                                Logger.d(TAG, "没有安装");
+                                Logger.d( "没有安装");
                                 CommonUtils.downLoadGameApp(WebViewActivity.this, "com.chaotoo.gamecenter");
                             }
                         }
 
                         @JavascriptInterface
                         public void jumpDownApp(String info) {
-                            Logger.d(TAG, "jumpDownApp: " + info);
+                            Logger.d( "jumpDownApp: " + info);
                             try {
                                 JSONObject jsonObject = new JSONObject(info);
                                 if (jsonObject.optInt("type") == 2) {
@@ -165,17 +165,17 @@ public class WebViewActivity extends ToolsBaseActivity {
                                         startActivity(intent);
                                     } else {
                                         if (CommonUtils.checkAppInstalled(WebViewActivity.this, packageName)) {
-                                            Logger.d(TAG, "已安装");
+                                            Logger.d( "已安装");
                                             CommonUtils.openApp(WebViewActivity.this, packageName);
                                         } else {
                                             CommonUtils.downLoadGameApp(WebViewActivity.this, packageName);
-                                            Logger.d(TAG, "没有安装");
+                                            Logger.d( "没有安装");
                                         }
                                     }
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                Logger.d(TAG, "jumpDownApp-JSONException" + e.getMessage());
+                                Logger.d( "jumpDownApp-JSONException" + e.getMessage());
                             }
                         }
 
@@ -198,7 +198,7 @@ public class WebViewActivity extends ToolsBaseActivity {
             //设置webview背景色，为白色
             frameLayout.setBackgroundColor(Color.TRANSPARENT);
             toCleanWebCache();
-            Logger.e(TAG, "webview-UserAgent：" + mAgentWeb.getAgentWebSettings().getWebSettings().getUserAgentString());
+            Logger.e( "webview-UserAgent：" + mAgentWeb.getAgentWebSettings().getWebSettings().getUserAgentString());
             /**
              * 启用mixed content    android 5.0以上默认不支持Mixed Content
              *
@@ -212,7 +212,7 @@ public class WebViewActivity extends ToolsBaseActivity {
             mAgentWeb.getWebCreator().getWebView().getSettings().setDomStorageEnabled(true);
 
         } catch (Exception e) {
-            Logger.e(TAG, "webview报错：" + e.getMessage());
+            Logger.e( "webview报错：" + e.getMessage());
         }
     }
 
@@ -223,9 +223,9 @@ public class WebViewActivity extends ToolsBaseActivity {
         @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-            Logger.e(TAG, "getDescription：" + error.getDescription());
-            Logger.e(TAG, "getErrorCode：" + error.getErrorCode());
-            Logger.e(TAG, "getUrl：" + request.getUrl());
+            Logger.e( "getDescription：" + error.getDescription());
+            Logger.e( "getErrorCode：" + error.getErrorCode());
+            Logger.e( "getUrl：" + request.getUrl());
             super.onReceivedError(view, request, error);
         }
 
@@ -244,7 +244,7 @@ public class WebViewActivity extends ToolsBaseActivity {
         @Override
         public boolean shouldOverrideUrlLoading(final WebView view, String url) {
             //一旦页面中有其他链接被点击了，则显示关闭页面按钮
-            Logger.e(TAG, "mWebViewClient shouldOverrideUrlLoading:" + url);
+            Logger.e( "mWebViewClient shouldOverrideUrlLoading:" + url);
             if (url.contains("chaotoo://xxjlb")) {
 //                if (!url.startsWith("http")) {
                 try {
@@ -257,7 +257,7 @@ public class WebViewActivity extends ToolsBaseActivity {
                 } catch (Exception e) {
                     // 防止没有安装的情况
                     e.printStackTrace();
-                    Logger.i(TAG, "您所打开的第三方App未安装！");
+                    Logger.i( "您所打开的第三方App未安装！");
                     CommonUtils.downLoadGameApp(WebViewActivity.this, "com.chaotoo.gamecenter");
                 }
                 return true;
@@ -268,7 +268,7 @@ public class WebViewActivity extends ToolsBaseActivity {
 
         @Override
         public void onPageStarted(WebView view, String URL, Bitmap favicon) {
-//            Logger.e(TAG, "mUrl:" + url + " onPageStarted  target:" + getUrl());
+//            Logger.e( "mUrl:" + url + " onPageStarted  target:" + getUrl());
             super.onPageStarted(view, URL, favicon);
 
             timer.put(URL, System.currentTimeMillis());
@@ -300,7 +300,7 @@ public class WebViewActivity extends ToolsBaseActivity {
         public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
             super.onReceivedHttpError(view, request, errorResponse);
 
-//            Logger.e(TAG, "onReceivedHttpError:" + "  request:" + request.getUrl() + "  errorResponse:" + errorResponse.getReasonPhrase());
+//            Logger.e( "onReceivedHttpError:" + "  request:" + request.getUrl() + "  errorResponse:" + errorResponse.getReasonPhrase());
         }
 
         @Override
@@ -314,7 +314,7 @@ public class WebViewActivity extends ToolsBaseActivity {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
 //            super.onProgressChanged(view, newProgress);
-//            Logger.e(TAG, "onProgressChanged:" + newProgress + "  view:" + view);
+//            Logger.e( "onProgressChanged:" + newProgress + "  view:" + view);
             if (newProgress >= 99) {
                 progress_gif_iv.setVisibility(View.GONE);
                 webview.setVisibility(View.VISIBLE);
@@ -346,7 +346,7 @@ public class WebViewActivity extends ToolsBaseActivity {
          */
         @Override
         public boolean intercept(String url, String[] permissions, String action) {
-//            Logger.e(TAG, "mUrl:" + url + "  permission:" + mGson.toJson(permissions) + " action:" + action);
+//            Logger.e( "mUrl:" + url + "  permission:" + mGson.toJson(permissions) + " action:" + action);
 
             return false;
         }
@@ -405,11 +405,11 @@ public class WebViewActivity extends ToolsBaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Logger.d(TAG, "requestCode---  " + requestCode);
-        Logger.d(TAG, "resultCode---  " + resultCode);
+        Logger.d( "requestCode---  " + requestCode);
+        Logger.d( "resultCode---  " + resultCode);
         if (null != data) {
             if (data.hasExtra("type")) {
-                Logger.d(TAG, "type---  " + data.getStringExtra("type"));
+                Logger.d( "type---  " + data.getStringExtra("type"));
             }
         }
 

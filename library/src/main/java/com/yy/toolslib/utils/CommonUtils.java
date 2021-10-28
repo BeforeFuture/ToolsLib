@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -21,11 +22,6 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -33,19 +29,6 @@ import java.util.Date;
 
 public class CommonUtils {
     private static String TAG = "CommonUtils";
-
-    public static final float SAMLL_DIALOG_WIDTH = 0.88f;//登录弹框一类的宽度,原设计图是0.67733333333333‬f
-    public static final float SAMLL_DIALOG_WIDTH_LANDSCAPE = 0.88f;//登录弹框横屏一类的宽度,原设计图是0.67733333333333‬f
-    public static final float BIG_DIALOG_WIDTH = 0.928f;//实名认证弹框的宽度,实名认证弹框
-
-    public final static String ACCOUNT_LIST_KEY = "ACCOUNT_LIST_KEY";//保存用户列表的KEY
-    public final static String DEVICE_INFO = "DEVICE_INFO";//设备信息
-
-//    public final static String GAME_ACCOUNT_LIST_KEY = "GAME_ACCOUNT_LIST_KEY" + MCApiFactory.getMCApi().getContext().getPackageName();//保存用户列表的KEY,2020.09.02
-    public final static String GAME_ACCOUNT_INFO = "GAME_ACCOUNT_INFO";//账户信息
-//    public final static String IS_HIDE_FLOATING_DIALOG = "IS_HIDE_FLOATING_DIALOG" + MCApiFactory.getMCApi().getContext().getPackageName();//是否隐藏悬浮窗，1表示隐藏 ，其他值表示显示
-
-    public static long UP_TIME = 0;//上线时间，即登录成功时间点
 
     private static boolean checkStoragePermission(Context context) {
         try {
@@ -61,6 +44,20 @@ public class CommonUtils {
 
     public static int dp2px(Context context, float value) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, context.getResources().getDisplayMetrics());
+    }
+
+    /**
+     * 保存当前分享界面为bitmap
+     *
+     * @param v 需要保存的view
+     * @return
+     */
+    public static Bitmap createViewBitmap(View v) {
+        Bitmap bitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        v.draw(canvas);
+        return bitmap;
     }
 
     /**
@@ -134,7 +131,7 @@ public class CommonUtils {
         }
     }
 
-    public void main(String[] args) throws ParseException {
+    public void formatTime() throws ParseException {
         String format = "HH:mm:ss";
         Date nowTime = new SimpleDateFormat(format).parse("09:27:00");
         Date startTime = new SimpleDateFormat(format).parse("09:27:00");
@@ -278,8 +275,8 @@ public class CommonUtils {
 
     /****************
      *
-     * 发起添加群流程。群号：老瘪犊子特战队(618468579) 的 key 为： -iDSSU204FAvYFYYOdRLd3yaRtdSOSaZ
-     * 调用 joinQQGroup(-iDSSU204FAvYFYYOdRLd3yaRtdSOSaZ) 即可发起手Q客户端申请加群 老瘪犊子特战队(618468579)
+     * 发起添加群流程。群号：xxxxxxxxxxxxxx 的 key 为： -iDSSU204FAvYFYYOdRLd3yaRtdSOSaZ1
+     * 调用 joinQQGroup(-iDSSU204FAvYFYYOdRLd3yaRtdSOSaZ) 即可发起手Q客户端申请加群 xxxxxxxxxx(11111111111)
      *
      * @param key 由官网生成的key
      * @return 返回true表示呼起手Q成功，返回false表示呼起失败
@@ -327,7 +324,7 @@ public class CommonUtils {
         int widthPixel = outMetrics.widthPixels;
         int heightPixel = outMetrics.heightPixels;
 
-//        LogUtils.i(TAG, "getScreenHeight-height:" + heightPixel);
+//        LogUtils.i( "getScreenHeight-height:" + heightPixel);
         return heightPixel;
     }
 
@@ -398,4 +395,27 @@ public class CommonUtils {
     }
 
 
+    /**
+     * 获取自定义参数
+     * 次方法仅对quick SDK生效，官包SDK暂时无效
+     *
+     * @param key
+     * @return
+     */
+    public static String getExtrasConfig(Activity mActivity, String key) {
+        String extras = "";
+        try {
+            ApplicationInfo appInfo = mActivity.getApplicationContext().getPackageManager().getApplicationInfo(mActivity.getPackageName(),
+                    PackageManager.GET_META_DATA);
+            extras = appInfo.metaData.getString(key);
+            if (null == extras) {
+                return "";
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            Logger.i("getExtrasConfig-NameNotFoundException: " + e.getMessage());
+            e.printStackTrace();
+            extras = "";
+        }
+        return extras;
+    }
 }

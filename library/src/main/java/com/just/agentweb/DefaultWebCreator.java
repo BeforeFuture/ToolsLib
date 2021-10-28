@@ -206,7 +206,7 @@ public class DefaultWebCreator implements WebCreator {
         FrameLayout.LayoutParams mLayoutParams = new FrameLayout.LayoutParams(-1, -1);
         mFrameLayout.addView(target, mLayoutParams);
         mFrameLayout.bindWebView(this.mWebView);
-        LogUtils.i(TAG, "  instanceof  AgentWebView:" + (this.mWebView instanceof AgentWebView));
+        LogUtils.i( TAG,"  instanceof  AgentWebView:" + (this.mWebView instanceof AgentWebView));
         if (this.mWebView instanceof AgentWebView) {
             this.mWebViewType = AgentWebConfig.WEBVIEW_AGENTWEB_SAFE_TYPE;
         }
@@ -240,7 +240,7 @@ public class DefaultWebCreator implements WebCreator {
         if ((mWebView = mIWebLayout.getWebView()) == null) {
             mWebView = createWebView();
             mIWebLayout.getLayout().addView(mWebView, -1, -1);
-            LogUtils.i(TAG, "add webview");
+            LogUtils.i( TAG,"add webview");
         } else {
             this.mWebViewType = AgentWebConfig.WEBVIEW_CUSTOM_TYPE;
         }

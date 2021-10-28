@@ -107,7 +107,7 @@ public class DefaultDesignUIController extends DefaultUIController {
                 return;
             }
         }
-        LogUtils.i(TAG, "url:" + url + "  ways:" + ways[0]);
+        LogUtils.i( TAG,"url:" + url + "  ways:" + ways[0]);
         RecyclerView mRecyclerView;
         if (mBottomSheetDialog == null) {
             mBottomSheetDialog = new BottomSheetDialog(mActivity);

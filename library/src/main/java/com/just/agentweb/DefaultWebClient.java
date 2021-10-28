@@ -157,7 +157,7 @@ public class DefaultWebClient extends MiddlewareWebClientBase {
             tag = false;
         }
         HAS_ALIPAY_LIB = tag;
-        LogUtils.i(TAG, "HAS_ALIPAY_LIB:" + HAS_ALIPAY_LIB);
+        LogUtils.i( TAG,"HAS_ALIPAY_LIB:" + HAS_ALIPAY_LIB);
     }
 
 
@@ -192,25 +192,25 @@ public class DefaultWebClient extends MiddlewareWebClientBase {
         // intent
         if (url.startsWith(INTENT_SCHEME)) {
             handleIntentUrl(url);
-            LogUtils.i(TAG, "intent url ");
+            LogUtils.i( TAG,"intent url ");
             return true;
         }
         // 微信支付
         if (url.startsWith(WEBCHAT_PAY_SCHEME)) {
-            LogUtils.i(TAG, "lookup wechat to pay ~~");
+            LogUtils.i( TAG,"lookup wechat to pay ~~");
             startActivity(url);
             return true;
         }
         if (url.startsWith(ALIPAYS_SCHEME) && lookup(url)) {
-            LogUtils.i(TAG, "alipays url lookup alipay ~~ ");
+            LogUtils.i( TAG,"alipays url lookup alipay ~~ ");
             return true;
         }
         if (queryActiviesNumber(url) > 0 && deepLink(url)) {
-            LogUtils.i(TAG, "intercept url:" + url);
+            LogUtils.i( TAG,"intercept url:" + url);
             return true;
         }
         if (mIsInterceptUnkownUrl) {
-            LogUtils.i(TAG, "intercept UnkownUrl :" + request.getUrl());
+            LogUtils.i( TAG,"intercept UnkownUrl :" + request.getUrl());
             return true;
         }
         return super.shouldOverrideUrlLoading(view, request);
@@ -243,7 +243,7 @@ public class DefaultWebClient extends MiddlewareWebClientBase {
                     return false;
                 }
                 ActivityInfo activityInfo = resolveInfo.activityInfo;
-                LogUtils.e(TAG, "resolve package:" + resolveInfo.activityInfo.packageName + " app package:" + mActivity.getPackageName());
+                LogUtils.e( TAG,"resolve package:" + resolveInfo.activityInfo.packageName + " app package:" + mActivity.getPackageName());
                 if (activityInfo != null
                         && !TextUtils.isEmpty(activityInfo.packageName)
                         && activityInfo.packageName.equals(mActivity.getPackageName())) {
@@ -295,12 +295,12 @@ public class DefaultWebClient extends MiddlewareWebClientBase {
         }
         //打开url 相对应的页面
         if (queryActiviesNumber(url) > 0 && deepLink(url)) {
-            LogUtils.i(TAG, "intercept OtherAppScheme");
+            LogUtils.i( TAG,"intercept OtherAppScheme");
             return true;
         }
         // 手机里面没有页面能匹配到该链接 ，拦截下来。
         if (mIsInterceptUnkownUrl) {
-            LogUtils.i(TAG, "intercept InterceptUnkownScheme : " + url);
+            LogUtils.i( TAG,"intercept InterceptUnkownScheme : " + url);
             return true;
         }
         return super.shouldOverrideUrlLoading(view, url);
@@ -418,7 +418,7 @@ public class DefaultWebClient extends MiddlewareWebClientBase {
 
 
             if (isIntercepted) {
-                LogUtils.i(TAG, "alipay-isIntercepted:" + isIntercepted + "  url:" + url);
+                LogUtils.i( "alipay-isIntercepted:" + isIntercepted + "  url:" + url);
             }
             */
             return false;
@@ -474,7 +474,7 @@ public class DefaultWebClient extends MiddlewareWebClientBase {
      */
     @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-        LogUtils.i(TAG, "onReceivedError：" + description + "  CODE:" + errorCode);
+        LogUtils.i( TAG,"onReceivedError：" + description + "  CODE:" + errorCode);
         onMainFrameError(view, errorCode, description, failingUrl);
     }
 
@@ -488,7 +488,7 @@ public class DefaultWebClient extends MiddlewareWebClientBase {
                     error.getErrorCode(), error.getDescription().toString(),
                     request.getUrl().toString());
         }
-        LogUtils.i(TAG, "onReceivedError:" + error.getDescription() + " code:" + error.getErrorCode());
+        LogUtils.i( TAG,"onReceivedError:" + error.getDescription() + " code:" + error.getErrorCode());
     }
 
     private void onMainFrameError(WebView view, int errorCode, String description, String failingUrl) {
@@ -563,7 +563,7 @@ public class DefaultWebClient extends MiddlewareWebClientBase {
 
     @Override
     public void onScaleChanged(WebView view, float oldScale, float newScale) {
-        LogUtils.i(TAG, "onScaleChanged:" + oldScale + "   n:" + newScale);
+        LogUtils.i( TAG,"onScaleChanged:" + oldScale + "   n:" + newScale);
         if (newScale - oldScale > CONSTANTS_ABNORMAL_BIG) {
             view.setInitialScale((int) (oldScale / newScale * 100));
         }

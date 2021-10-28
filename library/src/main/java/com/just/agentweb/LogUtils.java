@@ -39,7 +39,6 @@ class LogUtils {
     }
 
     static void v(String tag, String message) {
-
         if (isDebug()) {
             Log.v(PREFIX.concat(tag), message);
         }

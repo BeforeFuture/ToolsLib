@@ -16,6 +16,7 @@
 
 package com.just.agentweb;
 
+import android.annotation.SuppressLint;
 import android.webkit.WebView;
 
 import java.util.Map;
@@ -47,7 +48,7 @@ public class JsInterfaceHolderImpl extends JsBaseInterfaceHolder {
     @Override
     public JsInterfaceHolder addJavaObjects(Map<String, Object> maps) {
         if (!checkSecurity()) {
-            LogUtils.e(TAG, "The injected object is not safe, give up injection");
+            LogUtils.e( TAG,"The injected object is not safe, give up injection");
             return this;
         }
         Set<Map.Entry<String, Object>> sets = maps.entrySet();
@@ -77,8 +78,9 @@ public class JsInterfaceHolderImpl extends JsBaseInterfaceHolder {
         return this;
     }
 
+    @SuppressLint("JavascriptInterface")
     private JsInterfaceHolder addJavaObjectDirect(String k, Object v) {
-        LogUtils.i(TAG, "k:" + k + "  v:" + v);
+        LogUtils.i( TAG,"k:" + k + "  v:" + v);
         this.mWebView.addJavascriptInterface(v, k);
         return this;
     }

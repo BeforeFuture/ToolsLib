@@ -67,7 +67,7 @@ public class YyInflaterUtils {
         int id = 0;
         try {
             packageName = context.getPackageName();
-            //Logger.w(TAG, "packageName:"+packageName);
+            //Logger.w( "packageName:"+packageName);
             r = Class.forName(packageName + ".R");
             Class<?>[] classes = r.getClasses();
             Class<?> desireClass = null;
@@ -124,7 +124,7 @@ public class YyInflaterUtils {
         } else if (id1 != 0) {
             id = id1;
         } else {
-            Logger.e(TAG, "存在SDK找不到的资源文件:" + "className:" + className + ";   name:" + name);
+            Logger.e("存在SDK找不到的资源文件:" + "className:" + className + ";   name:" + name);
         }
         return id;
     }

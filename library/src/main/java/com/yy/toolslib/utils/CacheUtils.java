@@ -22,21 +22,11 @@ public class CacheUtils {
      * 移动了保存device id的目录，保证公司所有项目访问的同一个设备id
      */
     public static CacheInfo getAcache(Context context) {
-        //android 6.0以上，无权限，直接返回null
-        if (Build.VERSION.SDK_INT >= 23
-                && (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
-            return null;
+        File cache = new File((context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "/info/"));//+ DEVICE_INFO.hashCode()
+        if (!cache.exists()) {
+            cache.mkdirs();
         }
-
-        String cacheStr = "";
-        if (Build.VERSION.SDK_INT >= 29) { //如果Android 版本高于（或等于）Android 10，则需要更换路径
-                File cache = new File((context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "/device/"));//+ DEVICE_INFO.hashCode()
-                return CacheInfo.get(context, cache, 1000 * 1000 * 50, Integer.MAX_VALUE);
-        } else {
-            cacheStr = "/data/data/" + context.getPackageName() + "/device/";
-            File formFile = new File(cacheStr);
-            return CacheInfo.get(context, formFile, 1000 * 1000 * 50, Integer.MAX_VALUE);
-        }
+        return CacheInfo.get(context, cache, 1000 * 1000 * 50, Integer.MAX_VALUE);
     }
 
 }

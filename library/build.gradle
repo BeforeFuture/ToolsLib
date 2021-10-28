@@ -20,6 +20,12 @@ android {
         }
     }
 
+    //必须配置，使用lambda表达式
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 dependencies {
@@ -32,4 +38,6 @@ dependencies {
     implementation 'it.sephiroth.android.library.imagezoom:imagezoom:+'
 
     implementation files('libs/glide-3.6.0.jar')
+    implementation files('libs/jsoup-1.13.1.jar')
+    implementation files('libs/zxing-3.3.3.jar')
 }
