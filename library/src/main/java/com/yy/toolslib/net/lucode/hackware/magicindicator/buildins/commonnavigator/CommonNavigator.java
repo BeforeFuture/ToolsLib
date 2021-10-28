@@ -159,7 +159,7 @@ public class CommonNavigator extends FrameLayout implements IPagerNavigator, Nav
         } else if (id1 != 0) {
             id = id1;
         } else {
-//            Log.e(TAG, "存在SDK找不到的资源文件:" + "className:" + className + ";   name:" + name);
+//            Log.e( "存在SDK找不到的资源文件:" + "className:" + className + ";   name:" + name);
         }
         return id;
     }
@@ -179,7 +179,7 @@ public class CommonNavigator extends FrameLayout implements IPagerNavigator, Nav
         int id = 0;
         try {
             packageName = context.getPackageName();
-            //Log.w(TAG, "packageName:"+packageName);
+            //Log.w( "packageName:"+packageName);
             r = Class.forName(packageName + ".R");
             Class<?>[] classes = r.getClasses();
             Class<?> desireClass = null;

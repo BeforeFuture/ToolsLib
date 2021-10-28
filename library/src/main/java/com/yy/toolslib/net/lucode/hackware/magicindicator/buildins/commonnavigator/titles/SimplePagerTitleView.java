@@ -1,5 +1,6 @@
 package com.yy.toolslib.net.lucode.hackware.magicindicator.buildins.commonnavigator.titles;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -16,6 +17,7 @@ import com.yy.toolslib.net.lucode.hackware.magicindicator.buildins.commonnavigat
  * 博客: http://hackware.lucode.net
  * Created by hackware on 2016/6/26.
  */
+@SuppressLint("AppCompatCustomView")
 public class SimplePagerTitleView extends TextView implements IMeasurablePagerTitleView {
     protected int mSelectedColor;
     protected int mNormalColor;

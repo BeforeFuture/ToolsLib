@@ -54,6 +54,20 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * 缓存用户信息到本地
  */
+
+/**
+ * 获取保存设备信息的aCache
+ * 使用方法如下：
+ * <p>
+ * public static CacheInfo getAcache(Context context) {
+ * File cache = new File((context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "/device/"));//+ DEVICE_INFO.hashCode()
+ * if (!cache.exists()) {
+ * cache.mkdirs();
+ * }
+ * return CacheInfo.get(context, cache, 1000 * 1000 * 50, Integer.MAX_VALUE);
+ * }
+ */
+
 public class CacheInfo {
     public static final int TIME_HOUR = 60 * 60;
     public static final int TIME_DAY = TIME_HOUR * 24;
@@ -61,34 +75,8 @@ public class CacheInfo {
     private static final int MAX_COUNT = Integer.MAX_VALUE; // 不限制存放数据的数量
     private static Map<String, CacheInfo> mInstanceMap = new HashMap<String, CacheInfo>();
     private static Context context;
-    //用户登录保存用户信息的key
-//    private static String cacheStr = "/data/data/replaceStr/shared_prefs/";
 
     private CacheInfoManager mCache;
-
-   /* public static CacheInfo get(Context ctx) {
-        context = ctx;
-        return get(ctx, "CacheInfo");
-    }*/
-
-   /* public static CacheInfo get(Context ctx, String cacheName) {
-        context = ctx;
-        if (Build.VERSION.SDK_INT >= 29) {
-            //如果Android 版本高于（或等于）Android 10，则需要更换路径
-            cacheStr = "/Android/data/replaceStr/files/";
-        }
-        File f = new File(cacheStr.replace("replaceStr", ctx.getPackageName()), cacheName);
-        return get( ctx, f, MAX_SIZE, MAX_COUNT);
-    }*/
-
-   /* public static CacheInfo get(File cacheDir) {
-        return get(cacheDir, MAX_SIZE, MAX_COUNT);
-    }*/
-
-    /*public static CacheInfo get(Context ctx, long max_zise, int max_count) {
-        File f = new File(ctx.getCacheDir(), "CacheInfo");
-        return get( ctx, f, max_zise, max_count);
-    }*/
 
     public static CacheInfo get(Context ctx, File cacheDir, long max_zise, int max_count) {
         context = ctx;

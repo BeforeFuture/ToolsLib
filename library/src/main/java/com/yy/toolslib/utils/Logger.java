@@ -16,9 +16,13 @@ public class Logger {
      */
     static String ROOT_TAG = "YY_TOOLS_LIB_LOG_";
 
+
     static String className;//类名
     static String methodName;//方法名
     static int lineNumber;//行数
+
+    public static boolean isDebug;
+
 
     /**
      * 判断是否可以调试
@@ -26,16 +30,24 @@ public class Logger {
      * @return
      */
     public static boolean isDebuggable() {
-        return BuildConfig.DEBUG;
+        return isDebug;
     }
 
     private static String createLog(String log) {
+        if (null == log) {
+            log = "";
+        }
+
+        log = unicodeToUTF_8(log);
+
         StringBuffer buffer = new StringBuffer();
-        buffer.append("================");
+        buffer.append("");
         buffer.append(methodName);
-        buffer.append("(").append(className).append(":").append(lineNumber).append(")================:");
+        buffer.append("(").append(className).append(":").append(lineNumber).append("):");
         buffer.append(log);
-        return buffer.toString();
+
+        String result = buffer.toString();
+        return result;
     }
 
     /**
@@ -49,40 +61,64 @@ public class Logger {
         lineNumber = sElements[1].getLineNumber();
     }
 
-    public static void e(String TAG,String message) {
+    public static void e(String message) {
         if (!isDebuggable())
             return;
         getMethodNames(new Throwable().getStackTrace());
-        Log.e(ROOT_TAG + className, createLog(message));
+        Log.e(ROOT_TAG, createLog(message));
     }
 
-    public static void i(String TAG,String message) {
+    public static void i(String message) {
         if (!isDebuggable())
             return;
         getMethodNames(new Throwable().getStackTrace());
-        Log.i(ROOT_TAG + className, createLog(message));
+        Log.i(ROOT_TAG, createLog(message));
     }
 
-    public static void d(String TAG,String message) {
+    public static void d(String message) {
         if (!isDebuggable())
             return;
         getMethodNames(new Throwable().getStackTrace());
-        Log.d(ROOT_TAG + className, createLog(message));
+        Log.d(ROOT_TAG, createLog(message));
     }
 
-    public static void v(String TAG,String message) {
+    public static void v(String message) {
         if (!isDebuggable())
             return;
         getMethodNames(new Throwable().getStackTrace());
-        Log.v(ROOT_TAG + className, createLog(message));
+        Log.v(ROOT_TAG, createLog(message));
     }
 
-    public static void w(String TAG,String message) {
+    public static void w(String message) {
         if (!isDebuggable())
             return;
         getMethodNames(new Throwable().getStackTrace());
-        Log.w(ROOT_TAG + className, createLog(message));
+        Log.w(ROOT_TAG, createLog(message));
     }
-    
+
+    public static String unicodeToUTF_8(String src) {
+        if (null == src) {
+            return null;
+        }
+        System.out.println("src: " + src);
+        StringBuilder out = new StringBuilder();
+        for (int i = 0; i < src.length(); ) {
+            char c = src.charAt(i);
+            if (i + 6 < src.length() && c == '\\' && src.charAt(i + 1) == 'u') {
+                String hex = src.substring(i + 2, i + 6);
+                try {
+                    out.append((char) Integer.parseInt(hex, 16));
+                } catch (NumberFormatException nfe) {
+                    nfe.fillInStackTrace();
+                }
+                i = i + 6;
+            } else {
+                out.append(src.charAt(i));
+                ++i;
+            }
+        }
+        return out.toString();
+
+    }
     
 }

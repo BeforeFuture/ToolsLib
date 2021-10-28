@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -44,7 +45,22 @@ public class DeviceInfo {
      */
     public static final int MCH_READ_PHONE_STATE_REQUEST_CODE = 0x01;
 
+    public final static String DEVICE_INFO = "DEVICE_INFO";//设备信息
 
+
+    /**
+     * 获取保存设备信息的aCache
+     * 2020.06.23 之后使用
+     * 移动了保存device id的目录，保证公司所有项目访问的同一个设备id
+     */
+    public static CacheInfo getAcache(Context context) {
+        File cache = new File((context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "/info/"));//+ DEVICE_INFO.hashCode()
+        if (!cache.exists()) {
+            cache.mkdirs();
+        }
+        return CacheInfo.get(context, cache, 1000 * 1000 * 50, Integer.MAX_VALUE);
+    }
+    
     /**
      * 获取手机状态栏高度
      */
@@ -283,12 +299,12 @@ public class DeviceInfo {
      */
     public static String getMacAddress(Context context) {
         String mac = "00:00:00:00:00:00";
-        CacheInfo cacheInfo = CacheUtils.getAcache(context);
+        CacheInfo cacheInfo = getAcache(context);
         if (null == cacheInfo) {
             return mac;
         }
 
-        DeviceInfoModel cacheModel = (DeviceInfoModel) cacheInfo.getAsObject(CacheUtils.DEVICE_INFO);
+        DeviceInfoModel cacheModel = (DeviceInfoModel) cacheInfo.getAsObject(DEVICE_INFO);
         if (null != cacheModel && null != cacheModel.getMAC() && !cacheModel.getMAC().equals("")) {
             return cacheModel.getMAC();
         }
@@ -306,7 +322,7 @@ public class DeviceInfo {
         }
 
         cacheModel.setMAC(mac);
-        cacheInfo.put(CacheUtils.DEVICE_INFO, cacheModel);
+        cacheInfo.put(DEVICE_INFO, cacheModel);
 
         return mac;
     }
@@ -328,11 +344,11 @@ public class DeviceInfo {
 
     @SuppressLint({"MissingPermission", "HardwareIds"})
     public static String getMEID(Context context) {
-        CacheInfo cacheInfo = CacheUtils.getAcache(context);
+        CacheInfo cacheInfo = getAcache(context);
         if (null == cacheInfo) {
             return deviceMEID(context);
         }
-        DeviceInfoModel cacheModel = (DeviceInfoModel) cacheInfo.getAsObject(CacheUtils.DEVICE_INFO);
+        DeviceInfoModel cacheModel = (DeviceInfoModel) cacheInfo.getAsObject(DEVICE_INFO);
         if (null != cacheModel && null != cacheModel.getMEID() && !cacheModel.getMEID().equals("")) {
             return cacheModel.getMEID();
         }
@@ -342,7 +358,7 @@ public class DeviceInfo {
         if (null == cacheModel) {
             cacheModel = new DeviceInfoModel();
             cacheModel.setMEID(meid);
-            cacheInfo.put(CacheUtils.DEVICE_INFO, cacheModel);
+            cacheInfo.put(DEVICE_INFO, cacheModel);
         }
         return meid;
     }
@@ -365,11 +381,11 @@ public class DeviceInfo {
 
     @SuppressLint("MissingPermission")
     public static String getIMEI(Context context) {
-        CacheInfo cacheInfo = CacheUtils.getAcache(context);
+        CacheInfo cacheInfo = getAcache(context);
         if (null == cacheInfo) {
             return deviceIMEI_1(context);
         }
-        DeviceInfoModel cacheModel = (DeviceInfoModel) cacheInfo.getAsObject(CacheUtils.DEVICE_INFO);
+        DeviceInfoModel cacheModel = (DeviceInfoModel) cacheInfo.getAsObject(DEVICE_INFO);
         if (null != cacheModel && null != cacheModel.getIMEI_1() && !cacheModel.getIMEI_1().equals("")) {
             return cacheModel.getIMEI_1();
         }
@@ -379,7 +395,7 @@ public class DeviceInfo {
         if (null == cacheModel) {
             cacheModel = new DeviceInfoModel();
             cacheModel.setIMEI_1(imei_1);
-            cacheInfo.put(CacheUtils.DEVICE_INFO, cacheModel);
+            cacheInfo.put(DEVICE_INFO, cacheModel);
         }
 
         return imei_1;
@@ -411,12 +427,12 @@ public class DeviceInfo {
 
     @SuppressLint("MissingPermission")
     public static String getIMEI2(Context context) {
-        CacheInfo cacheInfo = CacheUtils.getAcache(context);
+        CacheInfo cacheInfo = getAcache(context);
         if (null == cacheInfo) {
             return deviceIMEI_2(context);
         }
 
-        DeviceInfoModel cacheModel = (DeviceInfoModel) cacheInfo.getAsObject(CacheUtils.DEVICE_INFO);
+        DeviceInfoModel cacheModel = (DeviceInfoModel) cacheInfo.getAsObject(DEVICE_INFO);
 
         if (null != cacheModel && null != cacheModel.getIMEI_2() && !cacheModel.getIMEI_2().equals("")) {
             return cacheModel.getIMEI_2();
@@ -427,7 +443,7 @@ public class DeviceInfo {
         if (null == cacheModel) {
             cacheModel = new DeviceInfoModel();
             cacheModel.setIMEI_2(imei_2);
-            cacheInfo.put(CacheUtils.DEVICE_INFO, cacheModel);
+            cacheInfo.put(DEVICE_INFO, cacheModel);
         }
         return imei_2;
     }
@@ -486,13 +502,13 @@ public class DeviceInfo {
      * @return
      */
     public static String getDeviceId(Context context) {
-        CacheInfo cacheInfo = CacheUtils.getAcache(context);
+        CacheInfo cacheInfo = getAcache(context);
         //用于生成最终的唯一标识符
         if (null == cacheInfo) {
             return deviceId(context);
         }
 
-        DeviceInfoModel cacheModel = (DeviceInfoModel) cacheInfo.getAsObject(CacheUtils.DEVICE_INFO);
+        DeviceInfoModel cacheModel = (DeviceInfoModel) cacheInfo.getAsObject(DEVICE_INFO);
 
         if (null != cacheModel && null != cacheModel.getMD5_DEVICE_ID() && !cacheModel.getMD5_DEVICE_ID().equals("")) {
             return cacheModel.getMD5_DEVICE_ID();
@@ -502,7 +518,7 @@ public class DeviceInfo {
             cacheModel = new DeviceInfoModel();
             cacheModel.setMD5_DEVICE_ID(deviceId(context));
             //持久化操作, 进行保存到SD卡中
-            cacheInfo.put(CacheUtils.DEVICE_INFO, cacheModel);
+            cacheInfo.put(DEVICE_INFO, cacheModel);
         }
 
         return deviceId(context);
@@ -607,12 +623,12 @@ public class DeviceInfo {
     }
 
     public static String getAndroidId(Context context) {
-        CacheInfo cacheInfo = CacheUtils.getAcache(context);
+        CacheInfo cacheInfo = getAcache(context);
         if (null == cacheInfo) {
             return createAndroidID(context);
         }
 
-        DeviceInfoModel cacheModel = (DeviceInfoModel) cacheInfo.getAsObject(CacheUtils.DEVICE_INFO);
+        DeviceInfoModel cacheModel = (DeviceInfoModel) cacheInfo.getAsObject(DEVICE_INFO);
 
         if (null != cacheModel && !cacheModel.getANDROID_ID().equals("")) {
             return cacheModel.getANDROID_ID();
@@ -621,7 +637,7 @@ public class DeviceInfo {
         if (null == cacheModel) {
             cacheModel = new DeviceInfoModel();
             cacheModel.setANDROID_ID(createAndroidID(context));
-            cacheInfo.put(CacheUtils.DEVICE_INFO, cacheModel);
+            cacheInfo.put(DEVICE_INFO, cacheModel);
         }
 
         return createAndroidID(context);
