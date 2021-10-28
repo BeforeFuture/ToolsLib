@@ -48,6 +48,12 @@ public class NotchScreenManager {
         }
     }
 
+    public void getNotchScreenInfo(final Activity activity, final INotchScreen.NotchScreenCallback notchScreenCallback) {
+        getNotchInfo(activity,notchScreenCallback);
+    }
+
+
+
     private INotchScreen getNotchScreen() {
         INotchScreen notchScreen = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {

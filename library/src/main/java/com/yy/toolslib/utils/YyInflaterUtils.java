@@ -50,8 +50,41 @@ public class YyInflaterUtils {
      * @param stringName 获取string名称
      * @return
      */
+    public static int getStringArrays(Context con, String stringName) {
+        return getIdByName(con, "array", stringName);
+    }
+
+    /**
+     * 获取string
+     *
+     * @param con        上下文
+     * @param stringName 获取string名称
+     * @return
+     */
     public static int getString(Context con, String stringName) {
         return getIdByName(con, "string", stringName);
+    }
+
+    /**
+     * 获取style
+     *
+     * @param con        上下文
+     * @param stringName 获取string名称
+     * @return
+     */
+    public static int getStyle(Context con, String stringName) {
+        return getIdByName(con, "style", stringName);
+    }
+
+    /**
+     * 获取color
+     *
+     * @param con        上下文
+     * @param stringName 获取string名称
+     * @return
+     */
+    public static int getColor(Context con, String stringName) {
+        return getIdByName(con, "color", stringName);
     }
 
     /**
