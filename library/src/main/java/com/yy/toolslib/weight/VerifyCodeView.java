@@ -22,6 +22,7 @@ import com.yy.toolslib.utils.YyInflaterUtils;
 
 @SuppressLint("AppCompatCustomView")
 public class VerifyCodeView extends ImageView {
+    private Context mContext;
     /**
      * 定义画笔
      */
@@ -112,25 +113,28 @@ public class VerifyCodeView extends ImageView {
 
     public VerifyCodeView(Context context) {
         this(context, null);
+        mContext = context;
     }
 
     public VerifyCodeView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
+        mContext = context;
     }
 
     public VerifyCodeView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.VerifyCodeView);
-        mUintWidth = ta.getDimensionPixelOffset(R.styleable.VerifyCodeView_unitHeight, 0);
-        mUintHeight = ta.getDimensionPixelOffset(R.styleable.VerifyCodeView_unitHeight, 0);
-        mUnitHeightScale = ta.getInteger(R.styleable.VerifyCodeView_unitHeightScale, 4);
-        mUnitWidthScale = ta.getInteger(R.styleable.VerifyCodeView_unitWidthScale, 5);
-        Drawable showBp = ta.getDrawable(R.styleable.VerifyCodeView_unitShowSrc);
+        mContext = context;
+        TypedArray ta = context.obtainStyledAttributes(attrs, YyInflaterUtils.getStyleableIntArray(mContext,"VerifyCodeView"));
+        mUintWidth = ta.getDimensionPixelOffset(YyInflaterUtils.getStyleableFieldId(mContext,"VerifyCodeView","VerifyCodeView_unitHeight"), 0);
+        mUintHeight = ta.getDimensionPixelOffset(YyInflaterUtils.getStyleableFieldId(mContext,"VerifyCodeView","VerifyCodeView_unitHeight"), 0);
+        mUnitHeightScale = ta.getInteger(YyInflaterUtils.getStyleableFieldId(mContext,"VerifyCodeView","VerifyCodeView_unitHeightScale"), 4);
+        mUnitWidthScale = ta.getInteger(YyInflaterUtils.getStyleableFieldId(mContext,"VerifyCodeView","VerifyCodeView_unitWidthScale"), 5);
+        Drawable showBp = ta.getDrawable(YyInflaterUtils.getStyleableFieldId(mContext,"VerifyCodeView","VerifyCodeView_unitShowSrc"));
         mShowBp = drawableToBitamp(showBp);
-        Drawable shadeBp = ta.getDrawable(R.styleable.VerifyCodeView_unitShadeSrc);
+        Drawable shadeBp = ta.getDrawable(YyInflaterUtils.getStyleableFieldId(mContext,"VerifyCodeView","VerifyCodeView_unitShadeSrc"));
         mShadeBp = drawableToBitamp(shadeBp);
-        needRotate = ta.getBoolean(R.styleable.VerifyCodeView_needRotate, true);
-        DEFAULT_DEVIATE = ta.getInteger(R.styleable.VerifyCodeView_deviate, 10);
+        needRotate = ta.getBoolean(YyInflaterUtils.getStyleableFieldId(mContext,"VerifyCodeView","VerifyCodeView_needRotate"), true);
+        DEFAULT_DEVIATE = ta.getInteger(YyInflaterUtils.getStyleableFieldId(mContext,"VerifyCodeView","VerifyCodeView_deviate"), 10);
 
         ta.recycle();
         // 初始化
@@ -142,7 +146,6 @@ public class VerifyCodeView extends ImageView {
             rotate = 0;
         }
     }
-
 
     /**
      * 随机生成生成滑块的XY坐标
@@ -245,7 +248,7 @@ public class VerifyCodeView extends ImageView {
         if (null != mShowBp) {
             showB = handleBitmap(mShowBp, mUintWidth, mUintHeight);
         } else {
-            showB = handleBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.puzzle_show), mUintWidth, mUintHeight);
+            showB = handleBitmap(BitmapFactory.decodeResource(getResources(),  YyInflaterUtils.getDrawable(mContext,"puzzle_show")), mUintWidth, mUintHeight);
         }
         // 如果需要旋转图片,进行旋转，旋转后为了保持和滑块大小一致,需要重新缩放比例
         if (needRotate) {
@@ -265,7 +268,7 @@ public class VerifyCodeView extends ImageView {
         if (null != mShadeBp) {
             shadeB = handleBitmap(mShadeBp, mUintWidth, mUintHeight);
         } else {
-            shadeB = handleBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.puzzle_shade), mUintWidth, mUintHeight);
+            shadeB = handleBitmap(BitmapFactory.decodeResource(getResources(), YyInflaterUtils.getDrawable(mContext,"puzzle_shade")), mUintWidth, mUintHeight);
         }
         // 如果需要旋转图片,进行旋转,旋转后为了和画布大小保持一致,避免出现图像显示不全,需要重新缩放比例
         if (needRotate) {

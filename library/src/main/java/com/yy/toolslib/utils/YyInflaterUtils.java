@@ -4,6 +4,8 @@ package com.yy.toolslib.utils;
 import android.content.Context;
 import android.content.res.Resources;
 
+import java.lang.reflect.Field;
+
 public class YyInflaterUtils {
 
     private static final String TAG = "YyInflaterUtils";
@@ -67,7 +69,6 @@ public class YyInflaterUtils {
         int id = 0;
         try {
             packageName = context.getPackageName();
-            //Logger.w( "packageName:"+packageName);
             r = Class.forName(packageName + ".R");
             Class<?>[] classes = r.getClasses();
             Class<?> desireClass = null;
@@ -127,5 +128,59 @@ public class YyInflaterUtils {
             Logger.e("存在SDK找不到的资源文件:" + "className:" + className + ";   name:" + name);
         }
         return id;
+    }
+
+    /**
+     * 获取attribute 资源数组
+     *
+     * @param context
+     * @param name
+     * @return
+     */
+    public static int[] getStyleableIntArray(Context context, String name) {
+        try {
+            Field[] fields = Class.forName(context.getPackageName() + ".R$styleable").getFields();//.与$ difference,$表示R的子类
+            for (Field field : fields) {
+                if (field.getName().equals(name)) {
+                    int ret[] = (int[]) field.get(null);
+                    return ret;
+                }
+            }
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    /**
+     * 遍历R类得到styleable数组资源下的子资源，1.先找到R类下的styleable子类，2.遍历styleable类获得字段值
+     *
+     * @param context
+     * @param styleableName      组名
+     * @param styleableFieldName 单个attr名称
+     * @return
+     */
+    public static int getStyleableFieldId(Context context, String styleableName, String styleableFieldName) {
+        String className = context.getPackageName() + ".R";
+        String type = "styleable";
+        String name = styleableName + "_" + styleableFieldName;
+        try {
+            Class<?> cla = Class.forName(className);
+            for (Class<?> childClass : cla.getClasses()) {
+                String simpleName = childClass.getSimpleName();
+                if (simpleName.equals(type)) {
+                    for (Field field : childClass.getFields()) {
+                        String fieldName = field.getName();
+                        if (fieldName.equals(name)) {
+                            return (int) field.get(null);
+                        }
+                    }
+                }
+            }
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
