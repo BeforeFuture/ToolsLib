@@ -8,13 +8,16 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import com.yy.toolslib.callback.VerifyCodeCallback;
 import com.yy.toolslib.matisse.Matisse;
 import com.yy.toolslib.matisse.MimeType;
 import com.yy.toolslib.matisse.internal.entity.CaptureStrategy;
 import com.yy.toolslib.utils.YyInflaterUtils;
 import com.yy.toolslib.utils.GlideImageEngine;
+import com.yy.toolslib.weight.verifycode.VerifyCodeDialog;
 
 import java.util.List;
 
@@ -30,8 +33,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void showVerifyDialog(){
+        VerifyCodeDialog.showVrifyCodeDialog(this, new VerifyCodeCallback() {
+            @Override
+            public void onSuccess() {
+                Log.d(TAG,"onSuccess");
+            }
 
+            @Override
+            public void onFial() {
+                Log.d(TAG,"onFial");
 
+            }
+        });
+    }
 
     /**
      * 跳转url界面

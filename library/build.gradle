@@ -1,7 +1,15 @@
 apply plugin: 'com.android.library'
+//apply plugin: 'com.kezong.fat-aar'//叠加aar打包，共三处，第一处
+
+//得到打包时间
+def static releaseTime() {
+    return new Date().format("yyyyMMddHHmmss")
+}
 
 android {
     compileSdkVersion 28
+
+    def ToolsLibVersion = "\"1.1.0\""//支付SDK版本号，转义符号需要保留,不能删除
 
     defaultConfig {
         minSdkVersion 21
@@ -12,10 +20,16 @@ android {
 
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'VersionDateTime', '\"' + releaseTime() + '\"'
+            buildConfigField "String", "ToolsLibVersion", "$ToolsLibVersion"
         }
     }
 
@@ -25,18 +39,52 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    //自动追加版本号和版本名称
+    android.libraryVariants.all { variant ->
+        if (variant.name.equalsIgnoreCase("release")) {
+            variant.outputs.all { output ->
+                def f = output.outputFileName
+                if (f != null && f.endsWith('.aar')) {
+                    def fileName = "toolslib_" + "$ToolsLibVersion" + ".aar"
+                    output.outputFileName = fileName.replace("\"", "")
+                }
+            }
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     api 'com.android.support:appcompat-v7:28.+'
-
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
+
     implementation 'it.sephiroth.android.library.imagezoom:imagezoom:+'
+    implementation 'com.github.gzu-liyujiang:Android_CN_OAID:4.2.3'
+    implementation 'com.youth.banner:banner:1.4.10'
 
     implementation files('libs/glide-3.6.0.jar')
     implementation files('libs/jsoup-1.13.1.jar')
     implementation files('libs/zxing-3.3.3.jar')
 }
+
+//叠加aar打包使用，共三处，第二处
+/*ext.supportLibVersion = '28.0.0'
+// If the value is changed to true, the dependencies of the remote dependency will also be embedded in the final aar.
+// the default value of transitive is false
+configurations.embed.transitive = true
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    compileOnly 'com.android.support:appcompat-v7:28.+'
+    compileOnly 'com.android.support:recyclerview-v7:28.0.0'
+    compileOnly 'com.android.support:design:28.0.0'
+
+    embed('it.sephiroth.android.library.imagezoom:imagezoom:+')
+    embed('com.github.gzu-liyujiang:Android_CN_OAID:4.2.3')
+    embed( 'com.youth.banner:banner:1.4.10')
+
+    compile files('libs/glide-3.6.0.jar')
+    compile files('libs/jsoup-1.13.1.jar')
+    compile files('libs/zxing-3.3.3.jar')
+}*/

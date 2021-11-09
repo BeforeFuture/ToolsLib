@@ -11,6 +11,11 @@
 
     //=======================================以下为自定义================================================
 
+    <style name="YYCustomDialogVerifyCode" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item><!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item><!-- 背景颜色及透明程度 -->
+        <item name="android:backgroundDimEnabled">false</item><!-- 是否模糊 -->
+    </style>
 
     <!-- ### web加载进度条 -->
     <style name="custom_style_web_progress" parent="@android:style/Widget.ProgressBar.Horizontal">

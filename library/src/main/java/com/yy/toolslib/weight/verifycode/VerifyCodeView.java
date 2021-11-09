@@ -1,4 +1,4 @@
-package com.yy.toolslib.weight;
+package com.yy.toolslib.weight.verifycode;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

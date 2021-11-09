@@ -44,6 +44,17 @@ public class YyInflaterUtils {
     }
 
     /**
+     * 获取资源文件
+     *
+     * @param con          上下文
+     * @param drawableName 资源名称
+     * @return
+     */
+    public static int getMipmap(Context con, String drawableName) {
+        return getIdByName(con, "mipmap", drawableName);
+    }
+
+    /**
      * 获取string
      *
      * @param con        上下文

@@ -363,6 +363,7 @@ public class DeviceInfo {
         return meid;
     }
 
+    @SuppressLint("MissingPermission")
     private static String deviceMEID(Context context) {
         String meid = "";
         if (Build.VERSION.SDK_INT < 29 && checkReadPhoneStatePermission(context)) {
@@ -401,6 +402,7 @@ public class DeviceInfo {
         return imei_1;
     }
 
+    @SuppressLint("MissingPermission")
     private static String deviceIMEI_1(Context context) {
         String imei1 = "";
         if (Build.VERSION.SDK_INT < 29 && checkReadPhoneStatePermission(context)) {
@@ -448,7 +450,7 @@ public class DeviceInfo {
         return imei_2;
     }
 
-
+    @SuppressLint("MissingPermission")
     private static String deviceIMEI_2(Context context) {
         String imei2 = "";
         if (Build.VERSION.SDK_INT < 29 && checkReadPhoneStatePermission(context)) {
